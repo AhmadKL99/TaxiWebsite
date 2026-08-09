@@ -1,0 +1,158 @@
+```html
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="Boka taxi snabbt och enkelt.">
+
+    <title>Taxi – Boka din resa</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">TAXI</div>
+        <p class="tagline">Snabb och enkel bokning</p>
+
+        <a href="tel:+46724474435" class="call-button">
+            📞 Ring nu
+            <span>072-447 44 35</span>
+        </a>
+    </header>
+
+
+    <main class="main">
+
+        <section class="booking-card">
+
+            <h1>Boka en resa</h1>
+            <p class="intro">
+                Fyll i uppgifterna nedan så återkommer vi med din bokning.
+            </p>
+
+
+            <form id="bookingForm">
+
+                <div class="field">
+                    <label for="from">Från</label>
+
+                    <input
+                        id="from"
+                        type="text"
+                        placeholder="Upphämtningsadress"
+                        autocomplete="street-address"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="to">Till</label>
+
+                    <input
+                        id="to"
+                        type="text"
+                        placeholder="Destination"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="date">Datum</label>
+
+                    <input
+                        id="date"
+                        type="date"
+                        required
+                    >
+                </div>
+
+
+                <div class="time-grid">
+
+                    <div class="field">
+                        <label for="hour">Timme</label>
+
+                        <select id="hour" required>
+                            <option value="">Timme</option>
+                        </select>
+                    </div>
+
+
+                    <div class="field">
+                        <label for="minute">Minuter</label>
+
+                        <select id="minute" required>
+                            <option value="">Minuter</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+                    <label for="name">Namn</label>
+
+                    <input
+                        id="name"
+                        type="text"
+                        placeholder="Ditt namn"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+
+                <div class="field">
+                    <label for="phone">Telefonnummer</label>
+
+                    <input
+                        id="phone"
+                        type="tel"
+                        placeholder="072-123 45 67"
+                        autocomplete="tel"
+                        required
+                    >
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="submitButton"
+                    class="submit-button"
+                >
+                    Skicka bokning
+                </button>
+
+
+                <div
+                    id="status"
+                    class="status"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 Taxi</p>
+        <p>Öppet dygnet runt</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
