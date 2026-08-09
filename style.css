@@ -1,112 +1,143 @@
 ```css
-/* =====================================================
+/* =========================================
    RESET
-===================================================== */
+========================================= */
 
 * {
     box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 100%;
     margin: 0;
     padding: 0;
 }
 
-
 html {
-    width: 100%;
-    min-height: 100%;
-
-    background: #050505;
+    background: #050805;
 }
 
-
 body {
-    width: 100%;
     min-height: 100vh;
 
-    overflow-x: hidden;
+    background: #050805;
 
-    background:
-        #050505;
-
-    color: white;
+    color: #ffffff;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
+    overflow-x: hidden;
+
     -webkit-text-size-adjust: 100%;
 }
 
 
-/* =====================================================
+/* =========================================
    HERO
-===================================================== */
+========================================= */
 
 .hero {
 
     position: relative;
 
     width: 100%;
-
-    min-height: 390px;
+    min-height: 360px;
 
     overflow: hidden;
 
     display: flex;
-
+    justify-content: center;
     align-items: center;
 
-    justify-content: center;
-
     text-align: center;
+
+    /*
+       DARK GREEN — NOT BRIGHT GREEN
+    */
 
     background:
         linear-gradient(
             180deg,
-            #0b3d1d 0%,
-            #0a2d17 35%,
-            #07140b 75%,
-            #050505 100%
+            #0c2413 0%,
+            #09170d 42%,
+            #050805 100%
         );
 }
 
 
-/* Large green light */
+/*
+   This glow covers the ENTIRE width.
+   There should be no black strip beside it.
+*/
 
-.hero-glow {
+.hero::before {
+
+    content: "";
 
     position: absolute;
 
-    width: 900px;
-    height: 600px;
-
+    top: -220px;
     left: 50%;
-    top: -250px;
 
-    transform:
-        translateX(-50%);
+    width: 140%;
+    height: 520px;
+
+    transform: translateX(-50%);
 
     background:
         radial-gradient(
-            ellipse,
-            rgba(40, 216, 102, 0.65)
-            0%,
+            ellipse at center,
 
-            rgba(40, 216, 102, 0.30)
-            35%,
+            rgba(40, 216, 102, 0.24) 0%,
 
-            rgba(40, 216, 102, 0.10)
-            55%,
+            rgba(40, 216, 102, 0.12) 30%,
 
-            transparent
-            75%
+            rgba(40, 216, 102, 0.045) 50%,
+
+            transparent 72%
         );
 
     pointer-events: none;
 }
 
 
-/* Hero content */
+/*
+   Extra soft glow.
+*/
+
+.hero-glow {
+
+    position: absolute;
+
+    left: 50%;
+    top: 40px;
+
+    width: 100vw;
+    height: 250px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+
+            rgba(40, 216, 102, 0.12),
+
+            transparent 70%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   HERO CONTENT
+========================================= */
 
 .hero-content {
 
@@ -117,133 +148,108 @@ body {
     width: 100%;
 
     padding:
-        max(40px, env(safe-area-inset-top))
-        20px
-        40px;
+        45px
+        18px
+        35px;
 }
 
 
-/* =====================================================
-   LOGO
-===================================================== */
+/* =========================================
+   TAXI LOGO
+========================================= */
 
 .logo {
 
-    font-size:
-        clamp(
-            58px,
-            17vw,
-            100px
-        );
-
-    font-weight: 1000;
-
-    letter-spacing: 5px;
-
-    line-height: 1;
+    display: block;
 
     color: #28d866;
 
+    font-size:
+        clamp(
+            52px,
+            15vw,
+            82px
+        );
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
     text-shadow:
-
-        0 0 10px
-        rgba(40, 216, 102, 0.9),
-
-        0 0 30px
-        rgba(40, 216, 102, 0.7),
-
-        0 0 70px
-        rgba(40, 216, 102, 0.45);
-
+        0 0 12px rgba(40, 216, 102, 0.55),
+        0 0 35px rgba(40, 216, 102, 0.20);
 }
 
 
-/* =====================================================
-   TAGLINE
-===================================================== */
+/* =========================================
+   SUBTITLE
+========================================= */
 
-.tagline {
+.subtitle {
 
-    margin-top: 12px;
+    margin-top: 10px;
+
+    color: #aeb9b0;
 
     font-size:
         clamp(
-            17px,
-            4.5vw,
-            23px
+            16px,
+            4vw,
+            20px
         );
 
-    color: #d0ded4;
-
     font-weight: 600;
-
 }
 
 
-/* =====================================================
-   CALL BUTTON
-===================================================== */
+/* =========================================
+   PHONE BUTTON
+========================================= */
 
-.call-button {
+.phone-button {
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 14px;
+    gap: 13px;
 
     width: 100%;
+    max-width: 430px;
 
-    max-width: 500px;
-
-    min-height: 78px;
+    min-height: 70px;
 
     margin:
-        30px auto
+        25px auto
         0;
 
-    padding:
-        12px
-        22px;
+    padding: 12px 20px;
 
-    border-radius: 20px;
+    border-radius: 17px;
 
-    background:
-        #28d866;
+    background: #28d866;
 
-    color:
-        #001b08;
+    color: #001b08;
 
     text-decoration: none;
 
     box-shadow:
+        0 8px 25px rgba(40, 216, 102, 0.20);
 
-        0 10px 35px
-        rgba(40, 216, 102, 0.35);
-
-    transition:
-        transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
-.call-button:active {
+.phone-icon {
 
-    transform:
-        scale(0.97);
-
+    font-size: 26px;
 }
 
 
-.call-icon {
-
-    font-size: 30px;
-
-}
-
-
-.call-text {
+.phone-button span:last-child {
 
     display: flex;
 
@@ -251,58 +257,54 @@ body {
 
     align-items: flex-start;
 
-    line-height: 1.15;
-
+    line-height: 1.1;
 }
 
 
-.call-text strong {
+.phone-button strong {
 
-    font-size: 22px;
+    font-size: 21px;
 
     font-weight: 900;
-
 }
 
 
-.call-text small {
+.phone-button small {
 
     margin-top: 4px;
 
-    font-size: 16px;
+    font-size: 15px;
 
     font-weight: 700;
-
 }
 
 
-/* =====================================================
+/* =========================================
    MAIN
-===================================================== */
+========================================= */
 
 .main {
 
     width: 100%;
 
+    margin: 0;
+
     padding:
-        25px
-        16px
-        45px;
+        20px
+        14px
+        40px;
 
-    background:
-        #050505;
-
+    background: #050805;
 }
 
 
-/* =====================================================
+/* =========================================
    BOOKING CARD
-===================================================== */
+========================================= */
 
-.booking-card {
+.card {
 
     width: 100%;
-
     max-width: 600px;
 
     margin:
@@ -310,75 +312,70 @@ body {
 
     padding:
         clamp(
-            24px,
-            6vw,
-            38px
+            22px,
+            5vw,
+            34px
         );
 
-    border-radius: 26px;
+    border-radius: 22px;
 
-    background:
-        #101610;
+    background: #101610;
 
     border:
-        1px solid #29372c;
+        1px solid #2b3b2e;
 
     box-shadow:
-
-        0 20px 60px
-        rgba(0, 0, 0, 0.45);
-
+        0 15px 45px rgba(0, 0, 0, 0.35);
 }
 
 
-/* =====================================================
-   HEADINGS
-===================================================== */
+/* =========================================
+   TITLE
+========================================= */
 
 h1 {
 
+    margin:
+        0 0 9px;
+
     font-size:
         clamp(
-            29px,
+            28px,
             7vw,
-            40px
+            36px
         );
 
     line-height: 1.1;
-
-    margin-bottom: 10px;
-
 }
 
 
-.intro {
+.description {
 
-    color: #aeb9b0;
+    margin:
+        0 0 25px;
+
+    color: #aab6ac;
 
     font-size:
         clamp(
             15px,
             4vw,
-            18px
+            17px
         );
 
     line-height: 1.5;
-
-    margin-bottom: 28px;
-
 }
 
 
-/* =====================================================
+/* =========================================
    FORM
-===================================================== */
+========================================= */
 
 .field {
 
     width: 100%;
 
-    margin-bottom: 20px;
-
+    margin-bottom: 18px;
 }
 
 
@@ -386,9 +383,9 @@ label {
 
     display: block;
 
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 
-    color: #d1dad3;
+    color: #c5d0c7;
 
     font-size:
         clamp(
@@ -397,74 +394,68 @@ label {
             18px
         );
 
-    font-weight: 800;
-
+    font-weight: 700;
 }
 
 
-/* =====================================================
+/* =========================================
    INPUTS
-===================================================== */
+========================================= */
 
 input,
 select {
 
+    display: block;
+
     width: 100%;
 
-    min-height: 62px;
+    min-height: 60px;
 
     padding:
-        14px
-        16px;
+        13px
+        15px;
 
     border:
         2px solid #2b3b2e;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
-    background:
-        #172117;
+    background: #172117;
 
-    color:
-        white;
+    color: #ffffff;
 
-    font-family:
-        inherit;
+    font-family: inherit;
 
-    font-size: 18px;
+    font-size: 17px;
 
     outline: none;
 
+    -webkit-appearance: none;
 }
 
 
 input::placeholder {
 
-    color:
-        #819087;
-
+    color: #819087;
 }
 
 
 input:focus,
 select:focus {
 
-    border-color:
-        #28d866;
+    border-color: #28d866;
 
     box-shadow:
-
         0 0 0 3px
-        rgba(40, 216, 102, 0.12);
-
+        rgba(40, 216, 102, 0.10);
 }
 
 
-/* =====================================================
+/* =========================================
    TIME
-===================================================== */
+========================================= */
 
-.time-grid {
+.time-row {
 
     display: grid;
 
@@ -472,238 +463,182 @@ select:focus {
         1fr
         1fr;
 
-    gap: 14px;
-
+    gap: 12px;
 }
 
 
-/* =====================================================
-   SUBMIT BUTTON
-===================================================== */
+/* =========================================
+   SUBMIT
+========================================= */
 
-.submit-button {
+button[type="submit"] {
+
+    display: block;
 
     width: 100%;
 
-    min-height: 65px;
+    min-height: 62px;
 
-    margin-top: 8px;
+    margin-top: 7px;
 
     border: none;
 
-    border-radius: 16px;
+    border-radius: 14px;
 
-    background:
-        #28d866;
+    background: #28d866;
 
-    color:
-        #001b08;
+    color: #001b08;
 
-    font-size: 20px;
+    font-family: inherit;
+
+    font-size: 19px;
 
     font-weight: 900;
 
     cursor: pointer;
 
+    -webkit-tap-highlight-color: transparent;
 }
 
 
-.submit-button:active {
+button[type="submit"]:active {
 
-    transform:
-        scale(0.98);
-
+    transform: scale(0.98);
 }
 
 
-.submit-button:disabled {
+button[type="submit"]:disabled {
 
-    opacity:
-        0.6;
+    opacity: 0.6;
 
-    cursor:
-        wait;
-
+    cursor: wait;
 }
 
 
-/* =====================================================
+/* =========================================
    STATUS
-===================================================== */
+========================================= */
 
 .status {
 
-    display:
-        none;
+    display: none;
 
-    margin-top:
-        18px;
+    width: 100%;
 
-    padding:
-        16px;
+    margin-top: 16px;
 
-    border-radius:
-        14px;
+    padding: 15px;
 
-    text-align:
-        center;
+    border-radius: 13px;
 
-    font-size:
-        16px;
+    text-align: center;
 
-    line-height:
-        1.5;
+    font-size: 16px;
 
-    font-weight:
-        700;
+    line-height: 1.5;
 
+    font-weight: 700;
 }
 
 
 .status.success {
 
-    display:
-        block;
+    display: block;
 
-    background:
-        #123d20;
+    background: #123d20;
 
-    color:
-        #8cffad;
-
+    color: #8cffad;
 }
 
 
 .status.error {
 
-    display:
-        block;
+    display: block;
 
-    background:
-        #451818;
+    background: #451818;
 
-    color:
-        #ffaaaa;
-
+    color: #ffaaaa;
 }
 
 
-/* =====================================================
+/* =========================================
    FOOTER
-===================================================== */
+========================================= */
 
 footer {
 
-    width:
-        100%;
+    width: 100%;
+
+    margin: 0;
 
     padding:
         0
         20px
-        max(
-            35px,
-            env(safe-area-inset-bottom)
-        );
+        35px;
 
-    text-align:
-        center;
+    background: #050805;
 
-    background:
-        #050505;
+    color: #6f7c73;
 
-    color:
-        #78837b;
+    text-align: center;
 
-    font-size:
-        14px;
+    font-size: 14px;
 
-    line-height:
-        1.8;
-
+    line-height: 1.8;
 }
 
 
-/* =====================================================
-   TABLETS / DESKTOP
-===================================================== */
+/* =========================================
+   TABLETS / LAPTOPS
+========================================= */
 
-@media (min-width: 768px) {
+@media (min-width: 700px) {
 
     .hero {
 
-        min-height:
-            450px;
-
+        min-height: 410px;
     }
 
+    .hero-content {
 
-    .main {
-
-        padding-left:
-            30px;
-
-        padding-right:
-            30px;
-
+        padding-top: 55px;
     }
 
 }
 
 
-/* =====================================================
-   SMALL PHONES
-===================================================== */
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
 
 @media (max-width: 360px) {
 
     .hero {
 
-        min-height:
-            350px;
-
+        min-height: 340px;
     }
-
 
     .hero-content {
 
-        padding-left:
-            14px;
-
-        padding-right:
-            14px;
-
+        padding-left: 12px;
+        padding-right: 12px;
     }
-
 
     .main {
 
-        padding-left:
-            10px;
-
-        padding-right:
-            10px;
-
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
+    .card {
 
-    .booking-card {
-
-        padding:
-            20px;
-
-        border-radius:
-            21px;
-
+        padding: 20px;
     }
-
 
     input,
     select {
 
-        font-size:
-            16px;
-
+        font-size: 16px;
     }
-
 }
 ```
