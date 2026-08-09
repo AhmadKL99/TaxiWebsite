@@ -1,173 +1,210 @@
-```html
 <!DOCTYPE html>
+
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070a08">
+    <meta name="description" content="Boka taxi snabbt och enkelt.">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+```
+<title>Taxi – Boka resa</title>
 
-    <meta name="theme-color" content="#050805">
+<link rel="stylesheet" href="style.css">
+```
 
-    <title>Taxi – Snabb och enkel bokning</title>
-
-    <!-- Prevent browser from displaying a default HTML document icon -->
-    <link
-        rel="icon"
-        type="image/svg+xml"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-    >
-
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HERO -->
+```
+<div class="page">
 
-    <header class="hero">
+    <!-- HEADER -->
+    <header class="header">
 
-        <div class="hero-glow"></div>
-
-        <div class="hero-content">
-
-            <div class="logo">
-                TAXI
-            </div>
-
-            <div class="subtitle">
+        <div class="brand">
+            <div class="brand-name">TAXI</div>
+            <div class="brand-subtitle">
                 Snabb och enkel bokning
             </div>
-
-            <a
-                class="phone-button"
-                href="tel:+46724474435"
-            >
-                <span class="phone-icon">📞</span>
-
-                <span>
-                    <strong>Ring nu</strong>
-                    <small>072-447 44 35</small>
-                </span>
-            </a>
-
         </div>
+
+        <a class="call-button" href="tel:+46724474435">
+            <span class="call-icon">☎</span>
+
+            <span class="call-text">
+                <strong>Ring nu</strong>
+                <span>072-447 44 35</span>
+            </span>
+        </a>
 
     </header>
 
 
     <!-- BOOKING -->
-
     <main class="main">
 
-        <section class="card">
+        <section class="booking-card">
 
-            <h1>Boka en resa</h1>
+            <div class="booking-header">
+                <h1>Boka en resa</h1>
 
-            <p class="description">
-                Fyll i uppgifterna nedan så återkommer vi med din bokning.
-            </p>
+                <p>
+                    Fyll i uppgifterna nedan för att skicka
+                    din taxibokning.
+                </p>
+            </div>
 
 
-            <form id="bookingForm">
+            <form id="bookingForm" novalidate>
 
-                <div class="field">
-                    <label for="from">Från</label>
+                <!-- FROM -->
+                <div class="form-group">
+
+                    <label for="from">
+                        Från
+                    </label>
 
                     <input
                         id="from"
+                        name="from"
                         type="text"
                         placeholder="Upphämtningsadress"
                         autocomplete="street-address"
                         required
                     >
+
                 </div>
 
 
-                <div class="field">
-                    <label for="to">Till</label>
+                <!-- TO -->
+                <div class="form-group">
+
+                    <label for="to">
+                        Till
+                    </label>
 
                     <input
                         id="to"
+                        name="to"
                         type="text"
                         placeholder="Destination"
                         required
                     >
+
                 </div>
 
 
-                <div class="field">
-                    <label for="date">Datum</label>
+                <!-- DATE -->
+                <div class="form-group">
+
+                    <label for="date">
+                        Datum
+                    </label>
 
                     <input
                         id="date"
+                        name="date"
                         type="date"
                         required
                     >
-                </div>
-
-
-                <div class="time-row">
-
-                    <div class="field">
-                        <label for="hour">Timme</label>
-
-                        <select id="hour" required>
-                            <option value="">Timme</option>
-                        </select>
-                    </div>
-
-
-                    <div class="field">
-                        <label for="minute">Minuter</label>
-
-                        <select id="minute" required>
-                            <option value="">Minuter</option>
-                        </select>
-                    </div>
 
                 </div>
 
 
-                <div class="field">
-                    <label for="name">Namn</label>
+                <!-- TIME -->
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="hour">
+                            Timme
+                        </label>
+
+                        <select
+                            id="hour"
+                            name="hour"
+                            required
+                        >
+                            <option value="">Välj</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="minute">
+                            Minuter
+                        </label>
+
+                        <select
+                            id="minute"
+                            name="minute"
+                            required
+                        >
+                            <option value="">Välj</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NAME -->
+                <div class="form-group">
+
+                    <label for="name">
+                        Namn
+                    </label>
 
                     <input
                         id="name"
+                        name="name"
                         type="text"
                         placeholder="Ditt namn"
                         autocomplete="name"
                         required
                     >
+
                 </div>
 
 
-                <div class="field">
-                    <label for="phone">Telefonnummer</label>
+                <!-- PHONE -->
+                <div class="form-group">
+
+                    <label for="phone">
+                        Telefonnummer
+                    </label>
 
                     <input
                         id="phone"
+                        name="phone"
                         type="tel"
                         placeholder="072-123 45 67"
                         autocomplete="tel"
                         required
                     >
+
                 </div>
 
 
+                <!-- SUBMIT -->
                 <button
                     id="submitButton"
+                    class="submit-button"
                     type="submit"
                 >
-                    Skicka bokning
+                    Boka resa
                 </button>
 
 
+                <!-- STATUS -->
                 <div
                     id="status"
                     class="status"
+                    role="status"
                     aria-live="polite"
                 ></div>
 
@@ -178,7 +215,8 @@
     </main>
 
 
-    <footer>
+    <!-- FOOTER -->
+    <footer class="footer">
 
         <div>© 2026 Taxi</div>
 
@@ -186,9 +224,11 @@
 
     </footer>
 
+</div>
 
-    <script src="script.js"></script>
+
+<script src="script.js"></script>
+```
 
 </body>
 </html>
-```
