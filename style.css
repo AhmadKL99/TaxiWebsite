@@ -1,7 +1,7 @@
 ```css
-/* =========================
+/* =====================================================
    RESET
-========================= */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -9,25 +9,25 @@
     padding: 0;
 }
 
+
 html {
     width: 100%;
     min-height: 100%;
+
     background: #050505;
 }
+
 
 body {
     width: 100%;
     min-height: 100vh;
 
-    background:
-        radial-gradient(
-            circle at top,
-            #12351d 0%,
-            #071008 35%,
-            #050505 70%
-        );
+    overflow-x: hidden;
 
-    color: #ffffff;
+    background:
+        #050505;
+
+    color: white;
 
     font-family:
         Arial,
@@ -38,226 +38,434 @@ body {
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* =====================================================
+   HERO
+===================================================== */
 
-.header {
+.hero {
+
+    position: relative;
+
     width: 100%;
 
-    padding:
-        max(28px, env(safe-area-inset-top))
-        20px
-        20px;
+    min-height: 390px;
 
-    text-align: center;
-}
+    overflow: hidden;
 
-.logo {
-    font-size: clamp(38px, 10vw, 58px);
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-
-    color: #28d866;
-}
-
-.tagline {
-    margin-top: 6px;
-
-    font-size: clamp(16px, 4vw, 20px);
-
-    color: #b7c1b9;
-}
-
-
-/* =========================
-   CALL BUTTON
-========================= */
-
-.call-button {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    gap: 8px;
+    text-align: center;
 
-    width: 100%;
-    max-width: 600px;
-
-    min-height: 64px;
-
-    margin:
-        22px auto
-        0;
-
-    padding: 15px 20px;
-
-    border-radius: 18px;
-
-    background: #28d866;
-
-    color: #001b08;
-
-    text-decoration: none;
-
-    font-size: clamp(19px, 5vw, 26px);
-
-    font-weight: 900;
-
-    box-shadow:
-        0 8px 30px
-        rgba(40, 216, 102, 0.25);
-
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
-}
-
-.call-button span {
-    font-weight: 700;
-}
-
-.call-button:active {
-    transform: scale(0.98);
+    background:
+        linear-gradient(
+            180deg,
+            #0b3d1d 0%,
+            #0a2d17 35%,
+            #07140b 75%,
+            #050505 100%
+        );
 }
 
 
-/* =========================
-   MAIN
-========================= */
+/* Large green light */
 
-.main {
+.hero-glow {
+
+    position: absolute;
+
+    width: 900px;
+    height: 600px;
+
+    left: 50%;
+    top: -250px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(40, 216, 102, 0.65)
+            0%,
+
+            rgba(40, 216, 102, 0.30)
+            35%,
+
+            rgba(40, 216, 102, 0.10)
+            55%,
+
+            transparent
+            75%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Hero content */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
     width: 100%;
 
     padding:
-        0
-        16px
+        max(40px, env(safe-area-inset-top))
+        20px
         40px;
 }
 
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+
+    font-size:
+        clamp(
+            58px,
+            17vw,
+            100px
+        );
+
+    font-weight: 1000;
+
+    letter-spacing: 5px;
+
+    line-height: 1;
+
+    color: #28d866;
+
+    text-shadow:
+
+        0 0 10px
+        rgba(40, 216, 102, 0.9),
+
+        0 0 30px
+        rgba(40, 216, 102, 0.7),
+
+        0 0 70px
+        rgba(40, 216, 102, 0.45);
+
+}
+
+
+/* =====================================================
+   TAGLINE
+===================================================== */
+
+.tagline {
+
+    margin-top: 12px;
+
+    font-size:
+        clamp(
+            17px,
+            4.5vw,
+            23px
+        );
+
+    color: #d0ded4;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   CALL BUTTON
+===================================================== */
+
+.call-button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    min-height: 78px;
+
+    margin:
+        30px auto
+        0;
+
+    padding:
+        12px
+        22px;
+
+    border-radius: 20px;
+
+    background:
+        #28d866;
+
+    color:
+        #001b08;
+
+    text-decoration: none;
+
+    box-shadow:
+
+        0 10px 35px
+        rgba(40, 216, 102, 0.35);
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+.call-button:active {
+
+    transform:
+        scale(0.97);
+
+}
+
+
+.call-icon {
+
+    font-size: 30px;
+
+}
+
+
+.call-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    line-height: 1.15;
+
+}
+
+
+.call-text strong {
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+}
+
+
+.call-text small {
+
+    margin-top: 4px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+
+    width: 100%;
+
+    padding:
+        25px
+        16px
+        45px;
+
+    background:
+        #050505;
+
+}
+
+
+/* =====================================================
+   BOOKING CARD
+===================================================== */
+
 .booking-card {
+
     width: 100%;
 
     max-width: 600px;
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
-    padding: clamp(22px, 5vw, 34px);
+    padding:
+        clamp(
+            24px,
+            6vw,
+            38px
+        );
 
-    border-radius: 24px;
+    border-radius: 26px;
 
-    background: rgba(16, 22, 16, 0.97);
+    background:
+        #101610;
 
-    border: 1px solid #29372c;
+    border:
+        1px solid #29372c;
 
     box-shadow:
+
         0 20px 60px
         rgba(0, 0, 0, 0.45);
+
 }
 
 
-/* =========================
-   TITLES
-========================= */
+/* =====================================================
+   HEADINGS
+===================================================== */
 
 h1 {
-    font-size: clamp(28px, 7vw, 38px);
 
-    line-height: 1.15;
+    font-size:
+        clamp(
+            29px,
+            7vw,
+            40px
+        );
 
-    margin-bottom: 8px;
+    line-height: 1.1;
+
+    margin-bottom: 10px;
+
 }
 
+
 .intro {
+
     color: #aeb9b0;
 
-    font-size: clamp(15px, 4vw, 18px);
+    font-size:
+        clamp(
+            15px,
+            4vw,
+            18px
+        );
 
     line-height: 1.5;
 
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+
 }
 
 
-/* =========================
+/* =====================================================
    FORM
-========================= */
+===================================================== */
 
 .field {
+
     width: 100%;
 
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+
 }
 
+
 label {
+
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 
     color: #d1dad3;
 
-    font-size: clamp(16px, 4vw, 18px);
+    font-size:
+        clamp(
+            16px,
+            4vw,
+            18px
+        );
 
-    font-weight: 700;
+    font-weight: 800;
+
 }
 
 
-/* =========================
+/* =====================================================
    INPUTS
-========================= */
+===================================================== */
 
 input,
 select {
+
     width: 100%;
 
-    height: 58px;
+    min-height: 62px;
 
     padding:
-        12px
-        15px;
+        14px
+        16px;
 
     border:
         2px solid #2b3b2e;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
-    background: #172117;
+    background:
+        #172117;
 
-    color: #ffffff;
+    color:
+        white;
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    font-size: 17px;
+    font-size: 18px;
 
     outline: none;
 
-    appearance: none;
-
-    -webkit-appearance: none;
 }
+
 
 input::placeholder {
-    color: #7f8c82;
+
+    color:
+        #819087;
+
 }
+
 
 input:focus,
 select:focus {
-    border-color: #28d866;
+
+    border-color:
+        #28d866;
 
     box-shadow:
+
         0 0 0 3px
         rgba(40, 216, 102, 0.12);
+
 }
 
 
-/* =========================
+/* =====================================================
    TIME
-========================= */
+===================================================== */
 
 .time-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -265,153 +473,236 @@ select:focus {
         1fr;
 
     gap: 14px;
+
 }
 
 
-/* =========================
-   SUBMIT
-========================= */
+/* =====================================================
+   SUBMIT BUTTON
+===================================================== */
 
 .submit-button {
+
     width: 100%;
 
-    min-height: 62px;
+    min-height: 65px;
 
     margin-top: 8px;
 
     border: none;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
-    background: #28d866;
+    background:
+        #28d866;
 
-    color: #001b08;
+    color:
+        #001b08;
 
-    font-size: 19px;
+    font-size: 20px;
 
     font-weight: 900;
 
     cursor: pointer;
 
-    transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
 }
+
 
 .submit-button:active {
-    transform: scale(0.98);
+
+    transform:
+        scale(0.98);
+
 }
+
 
 .submit-button:disabled {
-    opacity: 0.6;
 
-    cursor: wait;
+    opacity:
+        0.6;
+
+    cursor:
+        wait;
+
 }
 
 
-/* =========================
+/* =====================================================
    STATUS
-========================= */
+===================================================== */
 
 .status {
-    display: none;
 
-    margin-top: 18px;
+    display:
+        none;
 
-    padding: 16px;
+    margin-top:
+        18px;
 
-    border-radius: 14px;
+    padding:
+        16px;
 
-    text-align: center;
+    border-radius:
+        14px;
 
-    font-size: 16px;
+    text-align:
+        center;
 
-    line-height: 1.5;
+    font-size:
+        16px;
 
-    font-weight: 700;
+    line-height:
+        1.5;
+
+    font-weight:
+        700;
+
 }
+
 
 .status.success {
-    display: block;
 
-    background: #123d20;
+    display:
+        block;
 
-    color: #8cffad;
+    background:
+        #123d20;
+
+    color:
+        #8cffad;
+
 }
+
 
 .status.error {
-    display: block;
 
-    background: #451818;
+    display:
+        block;
 
-    color: #ffaaaa;
+    background:
+        #451818;
+
+    color:
+        #ffaaaa;
+
 }
 
 
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer {
-    width: 100%;
+
+    width:
+        100%;
 
     padding:
         0
         20px
-        max(30px, env(safe-area-inset-bottom));
+        max(
+            35px,
+            env(safe-area-inset-bottom)
+        );
 
-    text-align: center;
+    text-align:
+        center;
 
-    color: #78837b;
+    background:
+        #050505;
 
-    font-size: 14px;
+    color:
+        #78837b;
 
-    line-height: 1.7;
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
 }
 
 
-/* =========================
+/* =====================================================
    TABLETS / DESKTOP
-========================= */
+===================================================== */
 
 @media (min-width: 768px) {
 
-    .header {
-        padding-top: 50px;
+    .hero {
+
+        min-height:
+            450px;
+
     }
 
+
     .main {
-        padding-left: 30px;
-        padding-right: 30px;
+
+        padding-left:
+            30px;
+
+        padding-right:
+            30px;
+
     }
 
 }
 
 
-/* =========================
+/* =====================================================
    SMALL PHONES
-========================= */
+===================================================== */
 
 @media (max-width: 360px) {
 
-    .header {
-        padding-left: 14px;
-        padding-right: 14px;
+    .hero {
+
+        min-height:
+            350px;
+
     }
+
+
+    .hero-content {
+
+        padding-left:
+            14px;
+
+        padding-right:
+            14px;
+
+    }
+
 
     .main {
-        padding-left: 10px;
-        padding-right: 10px;
+
+        padding-left:
+            10px;
+
+        padding-right:
+            10px;
+
     }
 
+
     .booking-card {
-        padding: 18px;
-        border-radius: 20px;
+
+        padding:
+            20px;
+
+        border-radius:
+            21px;
+
     }
+
 
     input,
     select {
-        font-size: 16px;
+
+        font-size:
+            16px;
+
     }
 
 }
