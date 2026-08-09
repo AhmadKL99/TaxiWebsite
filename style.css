@@ -1,480 +1,442 @@
+```css
 * {
-  box-sizing: border-box;
-  }
+    box-sizing: border-box;
+}
 
 html,
 body {
-margin: 0;
-padding: 0;
-width: 100%;
-min-height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+
+    background: #050805;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: white;
+
+    overflow-x: hidden;
 }
 
 body {
-background: #050805;
-color: #ffffff;
-font-family: Arial, Helvetica, sans-serif;
-overflow-x: hidden;
+    min-height: 100vh;
 }
 
+
 /* =========================
-HEADER
+   HERO
 ========================= */
 
-.header {
-width: 100%;
-padding: 32px 16px 25px;
-text-align: center;
+.hero {
+    position: relative;
 
-```
-background:
-    radial-gradient(
-        ellipse 90% 80% at 50% 0%,
-        rgba(40, 216, 102, 0.14) 0%,
-        rgba(40, 216, 102, 0.05) 42%,
-        transparent 75%
-    );
-```
+    width: 100%;
+    min-height: 360px;
 
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse 100% 100% at 50% 0%,
+            rgba(40, 216, 102, 0.16) 0%,
+            rgba(40, 216, 102, 0.06) 40%,
+            rgba(5, 8, 5, 0) 75%
+        ),
+
+        #050805;
 }
 
-.brand {
-width: 100%;
+
+.hero-content {
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    padding:
+        45px
+        18px
+        35px;
+
+    text-align: center;
 }
 
-.brand-name {
-margin: 0;
-
-```
-color: #28d866;
-
-font-size: clamp(48px, 13vw, 72px);
-
-line-height: 1;
-
-font-weight: 900;
-
-letter-spacing: 3px;
-```
-
-}
-
-.brand-subtitle {
-margin-top: 8px;
-
-```
-color: #aab6ac;
-
-font-size: clamp(16px, 4vw, 19px);
-
-font-weight: 600;
-```
-
-}
 
 /* =========================
-RING NU BUTTON
+   TAXI
 ========================= */
 
-.call-button {
-display: flex;
+.logo {
+    font-size:
+        clamp(55px, 15vw, 85px);
 
-```
-align-items: center;
-justify-content: center;
+    line-height: 1;
 
-width: 100%;
-max-width: 430px;
+    font-weight: 900;
 
-min-height: 72px;
+    letter-spacing: 4px;
 
-margin: 24px auto 0;
+    color: #28d866;
 
-padding: 12px 20px;
-
-gap: 12px;
-
-border-radius: 16px;
-
-background: #28d866;
-
-color: #001b08;
-
-text-decoration: none;
-
-box-shadow:
-    0 8px 25px rgba(40, 216, 102, 0.18);
-```
-
+    text-shadow:
+        0 0 12px rgba(40, 216, 102, 0.5),
+        0 0 30px rgba(40, 216, 102, 0.18);
 }
 
-.call-icon {
-font-size: 26px;
+
+.subtitle {
+    margin-top: 10px;
+
+    color: #aab6ac;
+
+    font-size:
+        clamp(16px, 4vw, 20px);
+
+    font-weight: 600;
 }
 
-.call-text {
-display: flex;
-
-```
-flex-direction: column;
-
-align-items: flex-start;
-
-line-height: 1.1;
-```
-
-}
-
-.call-text strong {
-font-size: 21px;
-
-```
-font-weight: 900;
-```
-
-}
-
-.call-text span {
-margin-top: 4px;
-
-```
-font-size: 15px;
-
-font-weight: 700;
-```
-
-}
 
 /* =========================
-MAIN
+   RING NU
+========================= */
+
+.phone-button {
+    position: relative;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    width: 100%;
+    max-width: 430px;
+
+    min-height: 72px;
+
+    margin: 26px auto 0;
+
+    padding: 12px 20px;
+
+    border-radius: 17px;
+
+    background: #28d866;
+
+    color: #001b08;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 25px rgba(40, 216, 102, 0.20);
+}
+
+
+.phone-icon {
+    font-size: 27px;
+}
+
+
+.phone-content {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    line-height: 1.1;
+}
+
+
+.phone-content strong {
+    font-size: 21px;
+
+    font-weight: 900;
+}
+
+
+.phone-content small {
+    margin-top: 4px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   MAIN
 ========================= */
 
 .main {
-width: 100%;
+    width: 100%;
 
-```
-padding: 10px 14px 40px;
+    margin: 0;
 
-background: #050805;
-```
+    padding:
+        20px
+        14px
+        40px;
 
+    background: #050805;
 }
+
 
 /* =========================
-BOOKING CARD
+   BOOKING CARD
 ========================= */
 
-.booking-card {
-width: 100%;
+.card {
+    width: 100%;
+    max-width: 600px;
 
-```
-max-width: 600px;
+    margin: 0 auto;
 
-margin: 0 auto;
+    padding:
+        clamp(22px, 5vw, 34px);
 
-padding: 25px;
+    border-radius: 22px;
 
-background: #101610;
+    background: #101610;
 
-border: 1px solid #2b3b2e;
+    border: 1px solid #2b3b2e;
 
-border-radius: 22px;
-
-box-shadow:
-    0 15px 45px rgba(0, 0, 0, 0.35);
-```
-
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.35);
 }
+
+
+h1 {
+    margin: 0 0 9px;
+
+    font-size:
+        clamp(28px, 7vw, 36px);
+}
+
+
+.description {
+    margin: 0 0 25px;
+
+    color: #aab6ac;
+
+    font-size:
+        clamp(15px, 4vw, 17px);
+
+    line-height: 1.5;
+}
+
 
 /* =========================
-TITLE
+   FORM
 ========================= */
 
-.booking-header h1 {
-margin: 0 0 8px;
+.field {
+    width: 100%;
 
-```
-color: #ffffff;
-
-font-size: clamp(28px, 7vw, 34px);
-
-line-height: 1.2;
-```
-
+    margin-bottom: 18px;
 }
 
-.booking-header p {
-margin: 0 0 25px;
-
-```
-color: #aab6ac;
-
-font-size: 16px;
-
-line-height: 1.5;
-```
-
-}
-
-/* =========================
-FORM
-========================= */
-
-.form-group {
-width: 100%;
-
-```
-margin-bottom: 18px;
-```
-
-}
 
 label {
-display: block;
+    display: block;
 
-```
-margin-bottom: 7px;
+    margin-bottom: 8px;
 
-color: #dce5df;
+    color: #c5d0c7;
 
-font-size: 17px;
+    font-size:
+        clamp(16px, 4vw, 18px);
 
-font-weight: 700;
-```
-
+    font-weight: 700;
 }
+
 
 input,
 select {
-display: block;
+    display: block;
 
-```
-width: 100%;
+    width: 100%;
 
-height: 58px;
+    min-height: 60px;
 
-padding: 0 14px;
+    padding: 13px 15px;
 
-border: 1px solid #354238;
+    border: 2px solid #2b3b2e;
 
-border-radius: 13px;
+    border-radius: 14px;
 
-background: #172117;
+    background: #172117;
 
-color: #ffffff;
+    color: white;
 
-font-family: Arial, Helvetica, sans-serif;
+    font-family: inherit;
 
-font-size: 17px;
+    font-size: 17px;
 
-outline: none;
-```
-
+    outline: none;
 }
+
 
 input::placeholder {
-color: #9daaa1;
-
-```
-opacity: 1;
-```
-
+    color: #819087;
 }
+
 
 input:focus,
 select:focus {
-border-color: #28d866;
+    border-color: #28d866;
 
-```
-box-shadow:
-    0 0 0 3px rgba(40, 216, 102, 0.10);
-```
-
+    box-shadow:
+        0 0 0 3px rgba(40, 216, 102, 0.10);
 }
 
-input[type="date"] {
-color-scheme: dark;
-}
 
 /* =========================
-TIME
+   TIME
 ========================= */
 
-.form-row {
-display: grid;
+.time-row {
+    display: grid;
 
-```
-grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
-gap: 12px;
-```
-
+    gap: 12px;
 }
 
+
 /* =========================
-SUBMIT BUTTON
+   SUBMIT
 ========================= */
 
-.submit-button {
-display: block;
+button[type="submit"] {
+    display: block;
 
-```
-width: 100%;
+    width: 100%;
 
-height: 62px;
+    min-height: 62px;
 
-margin-top: 8px;
+    margin-top: 7px;
 
-border: 0;
+    border: none;
 
-border-radius: 14px;
+    border-radius: 14px;
 
-background: #28d866;
+    background: #28d866;
 
-color: #001b08;
+    color: #001b08;
 
-font-family: Arial, Helvetica, sans-serif;
+    font-family: inherit;
 
-font-size: 19px;
+    font-size: 19px;
 
-font-weight: 900;
+    font-weight: 900;
 
-cursor: pointer;
-```
-
+    cursor: pointer;
 }
 
-.submit-button:disabled {
-opacity: 0.6;
+
+button[type="submit"]:disabled {
+    opacity: 0.6;
 }
+
 
 /* =========================
-STATUS
+   STATUS
 ========================= */
 
 .status {
-display: none;
+    display: none;
 
-```
-margin-top: 16px;
+    width: 100%;
 
-padding: 15px;
+    margin-top: 16px;
 
-border-radius: 13px;
+    padding: 15px;
 
-text-align: center;
+    border-radius: 13px;
 
-font-size: 16px;
+    text-align: center;
 
-font-weight: 700;
-```
+    font-size: 16px;
 
+    font-weight: 700;
 }
+
 
 .status.success {
-display: block;
+    display: block;
 
-```
-background: #123d20;
+    background: #123d20;
 
-color: #9cffb5;
-```
-
+    color: #8cffad;
 }
+
 
 .status.error {
-display: block;
+    display: block;
 
-```
-background: #451818;
+    background: #451818;
 
-color: #ffaaaa;
-```
-
+    color: #ffaaaa;
 }
+
 
 /* =========================
-FOOTER
+   FOOTER
 ========================= */
 
-.footer {
-width: 100%;
+footer {
+    width: 100%;
 
-```
-padding: 0 20px 30px;
+    margin: 0;
 
-background: #050805;
+    padding:
+        0
+        20px
+        35px;
 
-color: #8b968e;
+    background: #050805;
 
-text-align: center;
+    color: #6f7c73;
 
-font-size: 14px;
+    text-align: center;
 
-line-height: 1.8;
-```
+    font-size: 14px;
 
+    line-height: 1.8;
 }
+
 
 /* =========================
-SMALL PHONES
+   SMALL PHONES
 ========================= */
 
-@media (max-width: 380px) {
+@media (max-width: 360px) {
 
-```
-.header {
-    padding: 28px 12px 22px;
-}
+    .hero {
+        min-height: 340px;
+    }
 
-.brand-name {
-    font-size: 48px;
-}
+    .hero-content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
 
-.call-button {
-    min-height: 68px;
+    .main {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
-    margin-top: 20px;
-}
+    .card {
+        padding: 20px;
+    }
 
-.main {
-    padding-left: 10px;
-
-    padding-right: 10px;
-}
-
-.booking-card {
-    padding: 20px;
-}
-
-input,
-select {
-    font-size: 16px;
-}
-```
-
-}
-
-/* =========================
-TABLETS / DESKTOP
-========================= */
-
-@media (min-width: 768px) {
-
-```
-.header {
-    padding-top: 42px;
-}
-
-.main {
-    padding-left: 20px;
-
-    padding-right: 20px;
-}
-
-.booking-card {
-    padding: 30px;
-}
-```
-
+    input,
+    select {
+        font-size: 16px;
+    }
 }
