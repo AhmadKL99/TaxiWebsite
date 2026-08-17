@@ -1,193 +1,164 @@
 const form = document.getElementById("bookingForm");
+const submitButton = document.getElementById("submitButton");
+const statusBox = document.getElementById("status");
 
-const submitButton =
-document.getElementById("submitButton");
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-const statusBox =
-document.getElementById("status");
+    // Prevent double submissions
+    submitButton.disabled = true;
+    submitButton.textContent = "Skickar bokning...";
 
-const hourSelect =
-document.getElementById("hour");
+    statusBox.className = "status";
+    statusBox.textContent = "";
 
-const minuteSelect =
-document.getElementById("minute");
+    // Collect booking information
+    const booking = {
+        from: document.getElementById("from").value.trim(),
+        to: document.getElementById("to").value.trim(),
+        date: document.getElementById("date").value,
+        hour: document.getElementById("hour").value,
+        minute: document.getElementById("minute").value,
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim()
+    };
 
-const dateInput =
-document.getElementById("date");
+    // Basic validation
+    if (
+        !booking.from ||
+        !booking.to ||
+        !booking.date ||
+        !booking.hour ||
+        !booking.minute ||
+        !booking.name ||
+        !booking.phone
+    ) {
+        showError("Fyll i alla uppgifter innan du skickar bokningen.");
+        return;
+    }
 
-/* ================================
-CREATE HOURS
-================================ */
+    // Validate hour
+    const hour = Number(booking.hour);
 
-for (let hour = 0; hour <= 23; hour++) {
+    if (hour < 0 || hour > 23) {
+        showError("Ange en giltig timme mellan 00 och 23.");
+        return;
+    }
 
-```
-const option =
-    document.createElement("option");
+    // Validate minute
+    const minute = Number(booking.minute);
 
-const value =
-    String(hour).padStart(2, "0");
+    if (minute < 0 || minute > 59) {
+        showError("Ange giltiga minuter mellan 00 och 59.");
+        return;
+    }
 
-option.value = value;
+    try {
+        /*
+         * Send booking to Cloudflare Worker
+         */
 
-option.textContent = value;
+        const response = await fetch("/api/book", {
+            method: "POST",
 
-hourSelect.appendChild(option);
-```
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-}
+            body: JSON.stringify({
+                from: booking.from,
+                to: booking.to,
+                date: booking.date,
+                hour: String(hour).padStart(2, "0"),
+                minute: String(minute).padStart(2, "0"),
+                name: booking.name,
+                phone: booking.phone
+            })
+        });
 
-/* ================================
-CREATE MINUTES
-================================ */
+        const result = await response.json();
 
-for (let minute = 0; minute < 60; minute += 5) {
+        /*
+         * Backend rejected the booking
+         */
 
-```
-const option =
-    document.createElement("option");
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.error || "Bokningen kunde inte skickas."
+            );
+        }
 
-const value =
-    String(minute).padStart(2, "0");
+        /*
+         * Booking successfully saved
+         */
 
-option.value = value;
+        statusBox.className = "status success";
 
-option.textContent = value;
+        statusBox.innerHTML = `
+            <strong>✅ Bokningen är mottagen!</strong><br><br>
+            Tack för din bokning.<br>
+            Vi återkommer så snart som möjligt.
+        `;
 
-minuteSelect.appendChild(option);
-```
+        // Clear form
+        form.reset();
 
-}
+        // Restore button
+        submitButton.disabled = false;
+        submitButton.textContent = "Skicka bokning";
 
-/* ================================
-PREVENT PAST DATES
-================================ */
+        /*
+         * Optional taxi animation
+         */
 
-const today =
-new Date().toISOString().split("T")[0];
+        triggerTaxiAnimation();
 
-dateInput.min = today;
+    } catch (error) {
 
-/* ================================
-FORM SUBMISSION
-================================ */
+        console.error("Booking error:", error);
 
-form.addEventListener("submit", function(event) {
-
-```
-event.preventDefault();
-
-
-const booking = {
-
-    from:
-        document
-            .getElementById("from")
-            .value
-            .trim(),
-
-    to:
-        document
-            .getElementById("to")
-            .value
-            .trim(),
-
-    date:
-        dateInput.value,
-
-    hour:
-        hourSelect.value,
-
-    minute:
-        minuteSelect.value,
-
-    name:
-        document
-            .getElementById("name")
-            .value
-            .trim(),
-
-    phone:
-        document
-            .getElementById("phone")
-            .value
-            .trim()
-
-};
-
-
-if (
-    !booking.from ||
-    !booking.to ||
-    !booking.date ||
-    !booking.hour ||
-    !booking.minute ||
-    !booking.name ||
-    !booking.phone
-) {
-
-    showStatus(
-        "Fyll i alla uppgifter.",
-        "error"
-    );
-
-    return;
-}
-
-
-submitButton.disabled = true;
-
-submitButton.textContent =
-    "Skickar bokning...";
+        showError(
+            "Något gick fel med bokningen.<br><br>" +
+            "Ring oss istället på <strong>072-447 44 35</strong>."
+        );
+    }
+});
 
 
 /*
-   TEMPORARY FRONTEND TEST
+ * Show error message
+ */
 
-   Supabase + Telegram will be
-   connected in the next step.
-*/
+function showError(message) {
 
-setTimeout(function() {
+    statusBox.className = "status error";
 
-    console.log(
-        "Booking:",
-        booking
-    );
-
-
-    showStatus(
-        "Bokningsförfrågan är klar att skickas.",
-        "success"
-    );
-
+    statusBox.innerHTML = message;
 
     submitButton.disabled = false;
+    submitButton.textContent = "Skicka bokning";
+}
 
-    submitButton.textContent =
-        "Boka resa";
 
-}, 700);
-```
+/*
+ * Small taxi animation
+ *
+ * This will only run if the animation
+ * element exists in the HTML.
+ */
 
-});
+function triggerTaxiAnimation() {
 
-/* ================================
-STATUS MESSAGE
-================================ */
+    const taxi = document.querySelector(".taxi-animation");
 
-function showStatus(message, type) {
+    if (!taxi) {
+        return;
+    }
 
-```
-statusBox.textContent = message;
+    taxi.classList.remove("drive");
 
-statusBox.className =
-    "status " + type;
+    // Force browser to restart animation
+    void taxi.offsetWidth;
 
-statusBox.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest"
-});
-```
-
+    taxi.classList.add("drive");
 }
