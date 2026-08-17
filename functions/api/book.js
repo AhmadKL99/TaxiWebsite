@@ -3,10 +3,8 @@ export async function onRequestPost(context) {
     const request = context.request;
     const env = context.env;
 
-    // Read the booking sent by the website
     const booking = await request.json();
 
-    // Basic validation
     const requiredFields = [
       "from",
       "to",
@@ -33,9 +31,8 @@ export async function onRequestPost(context) {
       }
     }
 
-    // Environment variables stored securely in Cloudflare
     const supabaseUrl = env.SUPABASE_URL;
-    const supabaseKey = env.SUPABASE_SECRET_KEY;
+    const supabaseKey = env.SUPABASE_SERVICE_ROLE_KEY;
     const telegramToken = env.TELEGRAM_BOT_TOKEN;
     const telegramChatId = env.TELEGRAM_CHAT_ID;
 
@@ -56,22 +53,16 @@ export async function onRequestPost(context) {
       );
     }
 
-    /*
-     * 1. SAVE BOOKING TO SUPABASE
-     */
-
     const supabaseResponse = await fetch(
       `${supabaseUrl}/rest/v1/bookings`,
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           "apikey": supabaseKey,
           "Authorization": `Bearer ${supabaseKey}`,
           "Prefer": "return=representation"
         },
-
         body: JSON.stringify({
           from_location: String(booking.from).trim(),
           to_location: String(booking.to).trim(),
@@ -103,10 +94,6 @@ export async function onRequestPost(context) {
       );
     }
 
-    /*
-     * 2. SEND TELEGRAM NOTIFICATION
-     */
-
     const telegramMessage =
       "🚕 NY TAXIBOKNING\n\n" +
       `Från: ${booking.from}\n` +
@@ -122,11 +109,9 @@ export async function onRequestPost(context) {
       `https://api.telegram.org/bot${telegramToken}/sendMessage`,
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
           chat_id: telegramChatId,
           text: telegramMessage
@@ -139,26 +124,15 @@ export async function onRequestPost(context) {
     if (!telegramResponse.ok || !telegramResult.ok) {
       console.error("Telegram error:", telegramResult);
 
-      /*
-       * IMPORTANT:
-       * The booking WAS saved successfully.
-       * Therefore we don't pretend the booking failed.
-       */
-
       return jsonResponse(
         {
           success: true,
           telegramSent: false,
-          message:
-            "Booking saved, but Telegram notification failed."
+          message: "Booking saved, but Telegram notification failed."
         },
         200
       );
     }
-
-    /*
-     * 3. EVERYTHING SUCCEEDED
-     */
 
     return jsonResponse(
       {
@@ -167,6 +141,7 @@ export async function onRequestPost(context) {
       },
       200
     );
+
   } catch (error) {
     console.error("Booking API error:", error);
 
@@ -180,15 +155,9 @@ export async function onRequestPost(context) {
   }
 }
 
-
-/*
- * JSON response helper
- */
-
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
@@ -198,15 +167,9 @@ function jsonResponse(data, status = 200) {
   });
 }
 
-
-/*
- * Handle browser CORS preflight requests
- */
-
 export async function onRequestOptions() {
   return new Response(null, {
     status: 204,
-
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
