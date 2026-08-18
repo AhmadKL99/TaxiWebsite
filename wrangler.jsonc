@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schema.json.schemastore.org/wrangler.json",
+  "name": "taxi-booking-worker",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-17",
+  "workers_dev": true,
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
