@@ -1,66 +1,133 @@
 <!DOCTYPE html>
-
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#070a08">
-    <meta name="description" content="Boka taxi snabbt och enkelt.">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Taxi – Boka resa</title>
+    <meta
+        name="theme-color"
+        content="#050208"
+    >
 
-<link rel="stylesheet" href="style.css">
+    <title>Taxi - Snabb taxi i Skåne</title>
 
-
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
 
+    <div class="site-shell">
 
-<div class="page">
+        <main class="hero-card">
 
-    <!-- HEADER -->
-    <header class="header">
-
-        <div class="brand">
-            <div class="brand-name">TAXI</div>
-            <div class="brand-subtitle">
-                Snabb och enkel bokning
-            </div>
-        </div>
-
-        <a class="call-button" href="tel:+46724474435">
-            <span class="call-icon">☎</span>
-
-            <span class="call-text">
-                <strong>Ring nu</strong>
-                <span>072-447 44 35</span>
-            </span>
-        </a>
-
-    </header>
+            <!-- Decorative glow -->
+            <div class="hero-glow"></div>
 
 
-    <!-- BOOKING -->
-    <main class="main">
+            <!-- =========================
+                 HEADER
+            ========================== -->
 
-        <section class="booking-card">
+            <header class="hero-header">
 
-            <div class="booking-header">
-                <h1>Boka en resa</h1>
+                <div class="brand-mark">
+                    🚕
+                </div>
 
-                <p>
-                    Fyll i uppgifterna nedan för att skicka
-                    din taxibokning.
+                <div>
+                    <p class="eyebrow">
+                        TAXI
+                    </p>
+
+                    <h1>
+                        Taxi
+                    </h1>
+
+                    <p class="subtitle signature-text">
+                        Snabb taxi i Skåne
+                    </p>
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 CALL PANEL
+            ========================== -->
+
+            <section class="call-panel">
+
+                <p class="phone-label">
+                    Ring oss direkt
                 </p>
+
+                <a
+                    class="phone-number"
+                    href="tel:+46724474435"
+                >
+                    072-447 44 35
+                </a>
+
+                <a
+                    class="call-button"
+                    href="tel:+46724474435"
+                >
+                    <span>☎</span>
+                    <span>Ring nu</span>
+                </a>
+
+            </section>
+
+
+            <!-- =========================
+                 TAXI ANIMATION
+            ========================== -->
+
+            <div class="taxi-track">
+
+                <div class="track-line"></div>
+
+                <div class="taxi-car">
+                    🚕
+                </div>
+
             </div>
 
 
-            <form id="bookingForm" novalidate>
+            <!-- =========================
+                 BOOKING FORM
+            ========================== -->
+
+            <form
+                id="bookingForm"
+                class="booking-form"
+                novalidate
+            >
+
+                <div class="form-heading">
+
+                    <h2 class="signature-heading">
+                        Boka en resa
+                    </h2>
+
+                    <p>
+                        Fyll i uppgifterna nedan för att skicka
+                        din taxibokning.
+                    </p>
+
+                </div>
+
 
                 <!-- FROM -->
-                <div class="form-group">
+
+                <div class="field-group">
 
                     <label for="from">
                         Från
@@ -72,6 +139,7 @@
                         type="text"
                         placeholder="Upphämtningsadress"
                         autocomplete="street-address"
+                        maxlength="120"
                         required
                     >
 
@@ -79,7 +147,8 @@
 
 
                 <!-- TO -->
-                <div class="form-group">
+
+                <div class="field-group">
 
                     <label for="to">
                         Till
@@ -90,6 +159,7 @@
                         name="to"
                         type="text"
                         placeholder="Destination"
+                        maxlength="120"
                         required
                     >
 
@@ -97,7 +167,8 @@
 
 
                 <!-- DATE -->
-                <div class="form-group">
+
+                <div class="field-group">
 
                     <label for="date">
                         Datum
@@ -114,9 +185,10 @@
 
 
                 <!-- TIME -->
-                <div class="form-row">
 
-                    <div class="form-group">
+                <div class="time-grid">
+
+                    <div class="field-group">
 
                         <label for="hour">
                             Timme
@@ -127,13 +199,15 @@
                             name="hour"
                             required
                         >
-                            <option value="">Välj</option>
+                            <option value="">
+                                Välj
+                            </option>
                         </select>
 
                     </div>
 
 
-                    <div class="form-group">
+                    <div class="field-group">
 
                         <label for="minute">
                             Minuter
@@ -144,7 +218,9 @@
                             name="minute"
                             required
                         >
-                            <option value="">Välj</option>
+                            <option value="">
+                                Välj
+                            </option>
                         </select>
 
                     </div>
@@ -153,7 +229,8 @@
 
 
                 <!-- NAME -->
-                <div class="form-group">
+
+                <div class="field-group">
 
                     <label for="name">
                         Namn
@@ -165,6 +242,7 @@
                         type="text"
                         placeholder="Ditt namn"
                         autocomplete="name"
+                        maxlength="80"
                         required
                     >
 
@@ -172,7 +250,8 @@
 
 
                 <!-- PHONE -->
-                <div class="form-group">
+
+                <div class="field-group">
 
                     <label for="phone">
                         Telefonnummer
@@ -184,6 +263,7 @@
                         type="tel"
                         placeholder="072-123 45 67"
                         autocomplete="tel"
+                        maxlength="32"
                         required
                     >
 
@@ -191,44 +271,60 @@
 
 
                 <!-- SUBMIT -->
+
                 <button
                     id="submitButton"
                     class="submit-button"
                     type="submit"
                 >
-                    Boka resa
+
+                    <span class="button-text">
+                        Boka resa
+                    </span>
+
+                    <span
+                        class="button-loader"
+                        aria-hidden="true"
+                    ></span>
+
                 </button>
 
 
                 <!-- STATUS -->
+
                 <div
                     id="status"
-                    class="status"
+                    class="form-message"
                     role="status"
                     aria-live="polite"
                 ></div>
 
             </form>
 
-        </section>
 
-    </main>
+            <!-- =========================
+                 FOOTER MESSAGE
+                 NO © 2026
+            ========================== -->
+
+            <p
+                style="
+                    margin: 22px 0 0;
+                    text-align: center;
+                    color: rgba(255,247,253,0.48);
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                "
+            >
+                Öppet dygnet runt
+            </p>
+
+        </main>
+
+    </div>
 
 
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div>© 2026 Taxi</div>
-
-        <div>Öppet dygnet runt</div>
-
-    </footer>
-
-</div>
-
-
-<script src="script.js"></script>
-
+    <script src="script.js"></script>
 
 </body>
 </html>
