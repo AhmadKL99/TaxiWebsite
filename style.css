@@ -495,3 +495,26 @@ select:focus {
     animation: none;
   }
 }
+```css
+/* =========================
+   SIGNATURE STYLE
+========================= */
+
+.logo {
+    font-family: "Segoe Script", "Brush Script MT", cursive;
+    font-style: italic;
+}
+
+.subtitle {
+    font-family: "Segoe Script", "Brush Script MT", cursive;
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.card h1 {
+    font-family: "Segoe Script", "Brush Script MT", cursive;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
