@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
 
@@ -13,43 +14,56 @@
         content="#08050d"
     >
 
+    <meta
+        name="description"
+        content="Snabb och enkel taxi i Skåne."
+    >
+
     <title>Taxi – Snabb taxi i Skåne</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260820-1">
 </head>
+
 
 <body>
 
     <!-- =====================================================
-         BACKGROUND SCENERY
+         FULL SCREEN BACKGROUND SCENERY
     ====================================================== -->
 
-    <div class="background-slideshow" aria-hidden="true">
+    <div
+        class="background-slideshow"
+        aria-hidden="true"
+    >
 
         <div
             class="background-image active"
-            style="background-image: url('images/scenery1.jpg');">
-        </div>
+            style="background-image: url('images/scenery1.jpg');"
+        ></div>
 
         <div
             class="background-image"
-            style="background-image: url('images/scenery2.jpg');">
-        </div>
+            style="background-image: url('images/scenery2.jpg');"
+        ></div>
 
         <div
             class="background-image"
-            style="background-image: url('images/scenery3.jpg');">
-        </div>
+            style="background-image: url('images/scenery3.jpg');"
+        ></div>
 
     </div>
 
 
-    <!-- Dark glass overlay -->
-    <div class="background-overlay" aria-hidden="true"></div>
+    <!-- Dark cinematic overlay -->
+
+    <div
+        class="background-overlay"
+        aria-hidden="true"
+    ></div>
 
 
     <!-- =====================================================
-         MAIN
+         MAIN WEBSITE
     ====================================================== -->
 
     <main class="site-shell">
@@ -59,7 +73,10 @@
 
             <!-- Decorative glow -->
 
-            <div class="hero-glow"></div>
+            <div
+                class="hero-glow"
+                aria-hidden="true"
+            ></div>
 
 
             <!-- =================================================
@@ -85,9 +102,17 @@
 
             <!-- =================================================
                  CALL PANEL
+                 
+                 IMPORTANT:
+                 Hidden by default.
+                 JavaScript shows it ONLY when an error occurs.
             ================================================== -->
 
-            <section class="call-panel">
+            <section
+                id="callPanel"
+                class="call-panel"
+                aria-hidden="true"
+            >
 
                 <div class="phone-label">
                     Ring oss direkt
@@ -99,7 +124,6 @@
                 >
                     072-447 44 35
                 </a>
-
 
                 <a
                     class="call-button glass-button"
@@ -233,9 +257,11 @@
                             name="hour"
                             required
                         >
+
                             <option value="">
                                 Välj
                             </option>
+
                         </select>
 
                     </div>
@@ -252,9 +278,11 @@
                             name="minute"
                             required
                         >
+
                             <option value="">
                                 Välj
                             </option>
+
                         </select>
 
                     </div>
@@ -335,7 +363,10 @@
     </main>
 
 
-    <script src="script.js"></script>
+    <!-- Cache-busting version -->
+
+    <script src="script.js?v=20260820-1"></script>
 
 </body>
+
 </html>
