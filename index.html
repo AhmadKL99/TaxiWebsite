@@ -10,63 +10,88 @@
 
     <meta
         name="theme-color"
-        content="#050208"
+        content="#08050d"
     >
 
-    <title>Taxi - Snabb taxi i Skåne</title>
+    <title>Taxi – Snabb taxi i Skåne</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="site-shell">
+    <!-- =====================================================
+         BACKGROUND SCENERY
+    ====================================================== -->
 
-        <main class="hero-card">
+    <div class="background-slideshow" aria-hidden="true">
+
+        <div
+            class="background-image active"
+            style="background-image: url('images/scenery1.jpg');">
+        </div>
+
+        <div
+            class="background-image"
+            style="background-image: url('images/scenery2.jpg');">
+        </div>
+
+        <div
+            class="background-image"
+            style="background-image: url('images/scenery3.jpg');">
+        </div>
+
+    </div>
+
+
+    <!-- Dark glass overlay -->
+    <div class="background-overlay" aria-hidden="true"></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="site-shell">
+
+        <section class="hero-card">
+
 
             <!-- Decorative glow -->
+
             <div class="hero-glow"></div>
 
 
-            <!-- =========================
+            <!-- =================================================
                  HEADER
-            ========================== -->
+            ================================================== -->
 
             <header class="hero-header">
 
-                <div class="brand-mark">
-                    🚕
-                </div>
+                <div class="brand">
 
-                <div>
-                    <p class="eyebrow">
+                    <div class="brand-name">
                         TAXI
-                    </p>
+                    </div>
 
-                    <h1>
-                        Taxi
-                    </h1>
-
-                    <p class="subtitle signature-text">
+                    <p class="subtitle">
                         Snabb taxi i Skåne
                     </p>
+
                 </div>
 
             </header>
 
 
-            <!-- =========================
+            <!-- =================================================
                  CALL PANEL
-            ========================== -->
+            ================================================== -->
 
             <section class="call-panel">
 
-                <p class="phone-label">
+                <div class="phone-label">
                     Ring oss direkt
-                </p>
+                </div>
 
                 <a
                     class="phone-number"
@@ -75,20 +100,28 @@
                     072-447 44 35
                 </a>
 
+
                 <a
-                    class="call-button"
+                    class="call-button glass-button"
                     href="tel:+46724474435"
                 >
-                    <span>☎</span>
-                    <span>Ring nu</span>
+
+                    <span class="call-icon">
+                        ☎
+                    </span>
+
+                    <span>
+                        Ring nu
+                    </span>
+
                 </a>
 
             </section>
 
 
-            <!-- =========================
-                 TAXI ANIMATION
-            ========================== -->
+            <!-- =================================================
+                 TAXI TRACK
+            ================================================== -->
 
             <div class="taxi-track">
 
@@ -101,9 +134,9 @@
             </div>
 
 
-            <!-- =========================
+            <!-- =================================================
                  BOOKING FORM
-            ========================== -->
+            ================================================== -->
 
             <form
                 id="bookingForm"
@@ -111,15 +144,18 @@
                 novalidate
             >
 
+
+                <!-- BOOKING HEADING -->
+
                 <div class="form-heading">
 
-                    <h2 class="signature-heading">
+                    <h1>
                         Boka en resa
-                    </h2>
+                    </h1>
 
                     <p>
-                        Fyll i uppgifterna nedan för att skicka
-                        din taxibokning.
+                        Fyll i uppgifterna nedan för att
+                        skicka din taxibokning.
                     </p>
 
                 </div>
@@ -139,7 +175,6 @@
                         type="text"
                         placeholder="Upphämtningsadress"
                         autocomplete="street-address"
-                        maxlength="120"
                         required
                     >
 
@@ -159,7 +194,6 @@
                         name="to"
                         type="text"
                         placeholder="Destination"
-                        maxlength="120"
                         required
                     >
 
@@ -242,7 +276,6 @@
                         type="text"
                         placeholder="Ditt namn"
                         autocomplete="name"
-                        maxlength="80"
                         required
                     >
 
@@ -263,7 +296,6 @@
                         type="tel"
                         placeholder="072-123 45 67"
                         autocomplete="tel"
-                        maxlength="32"
                         required
                     >
 
@@ -274,7 +306,7 @@
 
                 <button
                     id="submitButton"
-                    class="submit-button"
+                    class="submit-button glass-button"
                     type="submit"
                 >
 
@@ -282,10 +314,7 @@
                         Boka resa
                     </span>
 
-                    <span
-                        class="button-loader"
-                        aria-hidden="true"
-                    ></span>
+                    <span class="button-loader"></span>
 
                 </button>
 
@@ -301,27 +330,9 @@
 
             </form>
 
+        </section>
 
-            <!-- =========================
-                 FOOTER MESSAGE
-                 NO © 2026
-            ========================== -->
-
-            <p
-                style="
-                    margin: 22px 0 0;
-                    text-align: center;
-                    color: rgba(255,247,253,0.48);
-                    font-size: 0.85rem;
-                    font-weight: 600;
-                "
-            >
-                Öppet dygnet runt
-            </p>
-
-        </main>
-
-    </div>
+    </main>
 
 
     <script src="script.js"></script>
