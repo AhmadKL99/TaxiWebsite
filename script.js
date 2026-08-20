@@ -5,10 +5,11 @@ const statusBox = document.getElementById("status");
 const hourSelect = document.getElementById("hour");
 const minuteSelect = document.getElementById("minute");
 
-// =========================
-// CREATE TIME OPTIONS
-// =========================
+// ============================================================
+// TIME OPTIONS
+// ============================================================
 
+// Create hour options: 00–23
 if (hourSelect) {
     hourSelect.innerHTML = '<option value="">Välj</option>';
 
@@ -22,6 +23,7 @@ if (hourSelect) {
     }
 }
 
+// Create minute options: 00, 05, 10 ... 55
 if (minuteSelect) {
     minuteSelect.innerHTML = '<option value="">Välj</option>';
 
@@ -36,126 +38,218 @@ if (minuteSelect) {
 }
 
 
-// =========================
+// ============================================================
 // BOOKING FORM
-// =========================
+// ============================================================
 
-form.addEventListener("submit", async function (event) {
-    event.preventDefault();
+if (form) {
 
-    submitButton.disabled = true;
-    submitButton.textContent = "Skickar bokning...";
+    form.addEventListener("submit", async function (event) {
 
-    statusBox.className = "status";
-    statusBox.textContent = "";
+        event.preventDefault();
 
-    const booking = {
-        from: document.getElementById("from").value.trim(),
-        to: document.getElementById("to").value.trim(),
-        date: document.getElementById("date").value,
-        hour: document.getElementById("hour").value,
-        minute: document.getElementById("minute").value,
-        name: document.getElementById("name").value.trim(),
-        phone: document.getElementById("phone").value.trim()
-    };
+        // Prevent double-click / duplicate bookings
+        submitButton.disabled = true;
+        submitButton.textContent = "Skickar bokning...";
 
-    // =========================
-    // VALIDATION
-    // =========================
+        statusBox.className = "status";
+        statusBox.textContent = "";
 
-    if (
-        !booking.from ||
-        !booking.to ||
-        !booking.date ||
-        !booking.hour ||
-        !booking.minute ||
-        !booking.name ||
-        !booking.phone
-    ) {
-        showError("Fyll i alla uppgifter innan du skickar bokningen.");
-        return;
-    }
 
-    const hour = Number(booking.hour);
-    const minute = Number(booking.minute);
+        // ====================================================
+        // COLLECT FORM DATA
+        // ====================================================
 
-    if (hour < 0 || hour > 23) {
-        showError("Ange en giltig timme mellan 00 och 23.");
-        return;
-    }
+        const booking = {
+            from: document.getElementById("from").value.trim(),
+            to: document.getElementById("to").value.trim(),
+            date: document.getElementById("date").value,
+            hour: document.getElementById("hour").value,
+            minute: document.getElementById("minute").value,
+            name: document.getElementById("name").value.trim(),
+            phone: document.getElementById("phone").value.trim()
+        };
 
-    if (minute < 0 || minute > 59) {
-        showError("Ange giltiga minuter mellan 00 och 59.");
-        return;
-    }
 
-    try {
+        // ====================================================
+        // VALIDATION
+        // ====================================================
 
-        // =========================
-        // SEND TO CLOUDFLARE WORKER
-        // =========================
+        if (
+            !booking.from ||
+            !booking.to ||
+            !booking.date ||
+            !booking.hour ||
+            !booking.minute ||
+            !booking.name ||
+            !booking.phone
+        ) {
+            showError(
+                "Fyll i alla uppgifter innan du skickar bokningen."
+            );
+            return;
+        }
 
-        const response = await fetch("/api/book", {
-            method: "POST",
 
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
+        // Validate hour
+        const hour = Number(booking.hour);
 
-            body: JSON.stringify({
-                from_location: booking.from,
-                to_location: booking.to,
-                booking_date: booking.date,
-                booking_hour: hour,
-                booking_minute: minute,
-                customer_name: booking.name,
-                customer_phone: booking.phone
-            })
-        });
+        if (!Number.isInteger(hour) || hour < 0 || hour > 23) {
+            showError(
+                "Ange en giltig timme mellan 00 och 23."
+            );
+            return;
+        }
 
-        const result = await response.json();
 
-        if (!response.ok || !result.ok) {
-            throw new Error(
-                result.error || "Bokningen kunde inte skickas."
+        // Validate minute
+        const minute = Number(booking.minute);
+
+        if (
+            !Number.isInteger(minute) ||
+            minute < 0 ||
+            minute > 59
+        ) {
+            showError(
+                "Ange giltiga minuter mellan 00 och 59."
+            );
+            return;
+        }
+
+
+        // ====================================================
+        // SEND BOOKING TO CLOUDFLARE
+        // ====================================================
+
+        try {
+
+            const response = await fetch("/api/book", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+
+                /*
+                 * IMPORTANT:
+                 *
+                 * These field names MUST match book.js:
+                 *
+                 * from
+                 * to
+                 * date
+                 * hour
+                 * minute
+                 * name
+                 * phone
+                 */
+
+                body: JSON.stringify({
+                    from: booking.from,
+                    to: booking.to,
+                    date: booking.date,
+                    hour: String(hour).padStart(2, "0"),
+                    minute: String(minute).padStart(2, "0"),
+                    name: booking.name,
+                    phone: booking.phone
+                })
+            });
+
+
+            // =================================================
+            // READ SERVER RESPONSE
+            // =================================================
+
+            let result;
+
+            try {
+                result = await response.json();
+            } catch (jsonError) {
+                throw new Error(
+                    "Servern skickade ett ogiltigt svar."
+                );
+            }
+
+
+            // =================================================
+            // CHECK SERVER RESPONSE
+            // =================================================
+
+            /*
+             * book.js returns:
+             *
+             * { success: true }
+             *
+             * NOT:
+             *
+             * { ok: true }
+             */
+
+            if (!response.ok || !result.success) {
+
+                throw new Error(
+                    result.error ||
+                    "Bokningen kunde inte skickas."
+                );
+            }
+
+
+            // =================================================
+            // SUCCESS
+            // =================================================
+
+            statusBox.className = "status success";
+
+            statusBox.innerHTML = `
+                <strong>✅ Bokningen är mottagen!</strong><br><br>
+                Tack för din bokning.<br>
+                Vi återkommer så snart som möjligt.
+            `;
+
+
+            // Clear form
+            form.reset();
+
+
+            // Restore button
+            submitButton.disabled = false;
+            submitButton.textContent = "Boka resa";
+
+
+            // Taxi animation
+            triggerTaxiAnimation();
+
+
+        } catch (error) {
+
+            console.error("Booking error:", error);
+
+            /*
+             * TEMPORARY DEBUG MESSAGE
+             *
+             * This shows the actual error while we are testing.
+             */
+
+            showError(
+                "Bokningen kunde inte skickas.<br><br>" +
+                "Tekniskt fel: " +
+                "<strong>" +
+                escapeHtml(error.message) +
+                "</strong><br><br>" +
+                "Ring oss istället på " +
+                "<strong>072-447 44 35</strong>."
             );
         }
 
-        // =========================
-        // SUCCESS
-        // =========================
+    });
 
-        statusBox.className = "status success";
-
-        statusBox.innerHTML = `
-            <strong>✅ Bokningen är mottagen!</strong><br><br>
-            Tack för din bokning.<br>
-            Vi återkommer så snart som möjligt.
-        `;
-
-        form.reset();
-
-        submitButton.disabled = false;
-        submitButton.textContent = "Skicka bokning";
-
-        triggerTaxiAnimation();
-
-    } catch (error) {
-
-        console.error("Booking error:", error);
-
-        showError(
-            "Något gick fel med bokningen.<br><br>" +
-            'Ring oss istället på <strong>072-447 44 35</strong>.'
-        );
-    }
-});
+}
 
 
-// =========================
+// ============================================================
 // ERROR MESSAGE
-// =========================
+// ============================================================
 
 function showError(message) {
 
@@ -164,13 +258,27 @@ function showError(message) {
     statusBox.innerHTML = message;
 
     submitButton.disabled = false;
-    submitButton.textContent = "Skicka bokning";
+    submitButton.textContent = "Boka resa";
 }
 
 
-// =========================
+// ============================================================
+// ESCAPE ERROR TEXT
+// ============================================================
+
+function escapeHtml(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+}
+
+
+// ============================================================
 // TAXI ANIMATION
-// =========================
+// ============================================================
 
 function triggerTaxiAnimation() {
 
@@ -182,7 +290,45 @@ function triggerTaxiAnimation() {
 
     taxi.classList.remove("drive");
 
+    // Force browser to restart animation
     void taxi.offsetWidth;
 
     taxi.classList.add("drive");
+}
+
+
+// ============================================================
+// BACKGROUND IMAGE SLIDESHOW
+// ============================================================
+
+const backgroundImages =
+    document.querySelectorAll(".background-image");
+
+let currentBackground = 0;
+
+function changeBackground() {
+
+    if (backgroundImages.length <= 1) {
+        return;
+    }
+
+    backgroundImages[currentBackground]
+        .classList.remove("active");
+
+    currentBackground =
+        (currentBackground + 1) %
+        backgroundImages.length;
+
+    backgroundImages[currentBackground]
+        .classList.add("active");
+}
+
+
+// Change scenery every 8 seconds
+if (backgroundImages.length > 1) {
+
+    setInterval(
+        changeBackground,
+        8000
+    );
 }
