@@ -7,36 +7,20 @@
     color-scheme: dark;
 
     --text: #fff7fd;
+    --muted: rgba(255, 247, 253, 0.72);
 
-    --muted:
-        rgba(255, 247, 253, 0.72);
+    /* More transparent liquid glass */
+    --glass: rgba(255, 255, 255, 0.075);
+    --glass-strong: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.22);
 
-    --glass:
-        rgba(255, 255, 255, 0.12);
+    --pink: #ff3ea5;
+    --purple: #7c3aed;
+    --green: #49ff91;
 
-    --glass-strong:
-        rgba(255, 255, 255, 0.18);
-
-    --glass-border:
-        rgba(255, 255, 255, 0.24);
-
-    --pink:
-        #ff3ea5;
-
-    --purple:
-        #7c3aed;
-
-    --green:
-        #49ff91;
-
-    --radius-xl:
-        32px;
-
-    --radius-lg:
-        24px;
-
-    --radius-md:
-        18px;
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
 
     --shadow:
         0 30px 100px rgba(0, 0, 0, 0.55);
@@ -63,148 +47,115 @@
     box-sizing: border-box;
 }
 
-
 html {
-
     min-width: 320px;
-
     min-height: 100%;
 
-    background:
-        #050208;
+    background: #050208;
 
-    -webkit-text-size-adjust:
-        100%;
-
-    text-size-adjust:
-        100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
-
 body {
-
     min-width: 320px;
-
     min-height: 100vh;
-
     min-height: 100svh;
 
     margin: 0;
 
     overflow-x: hidden;
 
-    color:
-        var(--text);
+    color: var(--text);
 
-    /*
-     * IMPORTANT:
-     * Transparent body allows the scenery behind it
-     * to actually be visible.
-     */
-
-    background:
-        transparent;
+    background: #050208;
 }
 
 
 /* =========================================================
-   FULL SCREEN BACKGROUND
+   FULL-SCREEN BACKGROUND
 ========================================================= */
 
 .background-slideshow {
-
     position: fixed;
 
     inset: 0;
 
-    /*
-     * IMPORTANT:
-     * This MUST be above the body background.
-     */
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
 
-    z-index: 0;
+    z-index: -10;
 
     overflow: hidden;
 
-    background:
-        #050208;
+    background: #050208;
 }
 
-
 .background-image {
-
     position: absolute;
 
     inset: 0;
 
     width: 100%;
-
     height: 100%;
 
-    background-position:
-        center center;
-
-    background-size:
-        cover;
-
-    background-repeat:
-        no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     opacity: 0;
 
-    transform:
-        scale(1.06);
+    transform: scale(1.04);
 
     transition:
-        opacity 2.2s ease,
-        transform 8s ease;
-
-    will-change:
-        opacity,
-        transform;
+        opacity 2.5s ease-in-out,
+        transform 10s ease;
 }
 
-
 .background-image.active {
-
     opacity: 1;
 
-    transform:
-        scale(1.01);
+    transform: scale(1);
 }
 
 
 /* =========================================================
    BACKGROUND OVERLAY
+
+   Still dark enough for readability,
+   but lighter so scenery remains visible.
 ========================================================= */
 
 .background-overlay {
-
     position: fixed;
 
     inset: 0;
 
-    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+
+    z-index: -9;
 
     pointer-events: none;
 
     background:
-
         linear-gradient(
             180deg,
             rgba(4, 2, 8, 0.42),
-            rgba(15, 3, 22, 0.64)
+            rgba(15, 3, 22, 0.55)
         ),
 
         radial-gradient(
             circle at 15% 15%,
-            rgba(255, 62, 165, 0.20),
+            rgba(255, 62, 165, 0.18),
             transparent 35%
         ),
 
         radial-gradient(
             circle at 85% 20%,
-            rgba(124, 58, 237, 0.20),
+            rgba(124, 58, 237, 0.16),
             transparent 35%
         );
 }
@@ -215,17 +166,11 @@ body {
 ========================================================= */
 
 .site-shell {
-
-    position: relative;
-
-    z-index: 2;
-
     width: 100%;
 
     max-width: 760px;
 
     min-height: 100vh;
-
     min-height: 100svh;
 
     margin: 0 auto;
@@ -242,11 +187,10 @@ body {
 
 
 /* =========================================================
-   MAIN LIQUID GLASS CARD
+   MAIN GLASS CARD
 ========================================================= */
 
 .hero-card {
-
     position: relative;
 
     isolation: isolate;
@@ -262,37 +206,34 @@ body {
         24px 17px 22px;
 
     border:
-        1px solid
-        rgba(255, 255, 255, 0.22);
+        1px solid rgba(255, 255, 255, 0.20);
 
     border-radius:
         var(--radius-xl);
 
-    background:
+    /*
+       More transparent card
+    */
 
+    background:
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.17),
-            rgba(255, 255, 255, 0.055)
+            rgba(255, 255, 255, 0.105),
+            rgba(255, 255, 255, 0.025)
         );
 
     backdrop-filter:
-        blur(24px)
-        saturate(160%);
+        blur(20px)
+        saturate(145%);
 
     -webkit-backdrop-filter:
-        blur(24px)
-        saturate(160%);
+        blur(20px)
+        saturate(145%);
 
     box-shadow:
-
         var(--shadow),
-
         inset 0 1px 0
-        rgba(255, 255, 255, 0.25),
-
-        inset 0 -1px 0
-        rgba(0, 0, 0, 0.10);
+        rgba(255, 255, 255, 0.18);
 }
 
 
@@ -301,7 +242,6 @@ body {
 ========================================================= */
 
 .hero-card::before {
-
     position: absolute;
 
     inset: 0;
@@ -310,17 +250,15 @@ body {
 
     pointer-events: none;
 
-    border-radius:
-        inherit;
+    border-radius: inherit;
 
     background:
-
         linear-gradient(
             120deg,
-            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.13),
             transparent 25%,
             transparent 70%,
-            rgba(255, 62, 165, 0.09)
+            rgba(255, 62, 165, 0.06)
         );
 
     z-index: -1;
@@ -332,34 +270,27 @@ body {
 ========================================================= */
 
 .hero-glow {
-
     position: absolute;
 
     top: -100px;
-
     right: -90px;
 
     width: 280px;
-
     height: 280px;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 
     background:
-
         radial-gradient(
             circle,
-            rgba(255, 62, 165, 0.40),
-            rgba(124, 58, 237, 0.20),
+            rgba(255, 62, 165, 0.28),
+            rgba(124, 58, 237, 0.14),
             transparent 68%
         );
 
-    filter:
-        blur(8px);
+    filter: blur(8px);
 
-    z-index:
-        -1;
+    z-index: -1;
 }
 
 
@@ -368,7 +299,6 @@ body {
 ========================================================= */
 
 .hero-header {
-
     padding:
         5px
         3px
@@ -376,180 +306,131 @@ body {
 }
 
 
-.brand-name {
+/*
+   NEW TITLE
 
+   Signature/cursive appearance.
+*/
+
+.brand-title {
     margin: 0;
 
-    font-size:
-        clamp(3.5rem, 18vw, 5.5rem);
-
-    line-height:
-        0.9;
-
-    font-weight:
-        950;
-
-    letter-spacing:
-        -0.08em;
-
-    text-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.45);
-}
-
-
-/* =========================================================
-   SUBTITLE
-========================================================= */
-
-.subtitle {
-
-    margin:
-        10px 0 0;
-
-    color:
-        #ffd8f1;
+    color: #fff;
 
     font-family:
         "Segoe Script",
         "Brush Script MT",
         "Lucida Handwriting",
+        "Snell Roundhand",
+        "Apple Chancery",
         cursive;
 
-    font-style:
-        italic;
+    font-style: italic;
+
+    font-weight: 600;
 
     font-size:
-        clamp(1.05rem, 4.5vw, 1.4rem);
+        clamp(2.35rem, 11vw, 4.4rem);
 
-    font-weight:
-        600;
+    line-height: 1.05;
 
-    letter-spacing:
-        0.01em;
+    letter-spacing: -0.025em;
 
     text-shadow:
-        0 4px 20px
-        rgba(255, 62, 165, 0.25);
+        0 8px 30px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(255, 62, 165, 0.15);
 }
 
 
 /* =========================================================
    CALL PANEL
-   HIDDEN BY DEFAULT
+
+   Hidden by default.
+   JavaScript adds .is-visible after an error.
 ========================================================= */
 
 .call-panel {
-
     display: none;
 
-    padding:
-        17px;
+    padding: 17px;
 
-    margin-bottom:
-        14px;
+    margin-bottom: 14px;
 
     border:
-        1px solid
-        rgba(255, 255, 255, 0.22);
+        1px solid rgba(255, 255, 255, 0.18);
 
     border-radius:
         var(--radius-lg);
 
     background:
-
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.15),
-            rgba(255, 255, 255, 0.05)
-        );
+        rgba(5, 5, 10, 0.20);
 
     backdrop-filter:
-        blur(24px)
-        saturate(160%);
+        blur(20px)
+        saturate(150%);
 
     -webkit-backdrop-filter:
-        blur(24px)
-        saturate(160%);
+        blur(20px)
+        saturate(150%);
 
     box-shadow:
-
         inset 0 1px 0
-        rgba(255, 255, 255, 0.18),
-
+        rgba(255, 255, 255, 0.14),
         0 20px 60px
-        rgba(0, 0, 0, 0.25);
+        rgba(0, 0, 0, 0.20);
+}
+
+.call-panel.is-visible {
+    display: block;
 
     animation:
-        panelAppear
+        callPanelIn
         350ms
-        ease
+        ease-out
         both;
 }
 
-
-.call-panel.is-visible {
-
-    display: block;
-}
-
-
-@keyframes panelAppear {
-
+@keyframes callPanelIn {
     from {
         opacity: 0;
-        transform:
-            translateY(-10px)
-            scale(0.98);
+        transform: translateY(-10px);
     }
 
     to {
         opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0);
     }
 }
 
 
 .phone-label {
-
     margin: 0;
 
     color:
         rgba(255, 247, 253, 0.68);
 
-    font-size:
-        0.82rem;
+    font-size: 0.82rem;
 
-    font-weight:
-        750;
+    font-weight: 750;
 
-    letter-spacing:
-        0.07em;
+    letter-spacing: 0.07em;
 
-    text-transform:
-        uppercase;
+    text-transform: uppercase;
 }
 
-
 .phone-number {
-
     display: inline-flex;
 
-    margin-top:
-        6px;
+    margin-top: 6px;
 
-    color:
-        white;
+    color: white;
 
     font-size:
         clamp(1.6rem, 8vw, 2.4rem);
 
-    font-weight:
-        900;
+    font-weight: 900;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 }
 
 
@@ -558,72 +439,70 @@ body {
 ========================================================= */
 
 .glass-button {
-
     position: relative;
 
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
 
     width: 100%;
 
+    min-width: 0;
+
     min-height: 58px;
+
+    padding:
+        0 16px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.30);
+        rgba(255, 255, 255, 0.26);
 
-    border-radius:
-        20px;
+    border-radius: 20px;
 
-    color:
-        white;
+    color: white;
+
+    /*
+       More transparent than before.
+    */
 
     background:
-
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.20),
-            rgba(255, 255, 255, 0.07)
+            rgba(255, 255, 255, 0.105),
+            rgba(255, 255, 255, 0.035)
         );
 
     backdrop-filter:
-        blur(25px)
-        saturate(180%);
+        blur(22px)
+        saturate(170%);
 
     -webkit-backdrop-filter:
-        blur(25px)
-        saturate(180%);
+        blur(22px)
+        saturate(170%);
 
     box-shadow:
-
         inset 0 1px 0
-        rgba(255, 255, 255, 0.38),
+        rgba(255, 255, 255, 0.30),
 
         inset 0 -1px 0
-        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.12),
 
         0 15px 40px
-        rgba(0, 0, 0, 0.25);
+        rgba(0, 0, 0, 0.20);
 
-    font-size:
-        1.08rem;
+    font-size: 1.08rem;
 
-    font-weight:
-        850;
+    font-weight: 850;
 
-    text-decoration:
-        none;
+    text-decoration: none;
 
-    cursor:
-        pointer;
+    cursor: pointer;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     transition:
         transform 180ms ease,
@@ -633,63 +512,52 @@ body {
 
 
 .glass-button::before {
-
     position: absolute;
 
     top: 0;
-
     left: -100%;
 
     width: 70%;
-
     height: 100%;
 
     content: "";
 
     background:
-
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.22),
+            rgba(255, 255, 255, 0.18),
             transparent
         );
 
-    transform:
-        skewX(-20deg);
+    transform: skewX(-20deg);
 
     transition:
         left 600ms ease;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 }
 
 
 .glass-button:hover::before {
-
-    left:
-        130%;
+    left: 130%;
 }
 
 
 .glass-button:hover {
-
     background:
-
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.28),
-            rgba(255, 255, 255, 0.10)
+            rgba(255, 255, 255, 0.16),
+            rgba(255, 255, 255, 0.05)
         );
 
     box-shadow:
-
         inset 0 1px 0
-        rgba(255, 255, 255, 0.45),
+        rgba(255, 255, 255, 0.38),
 
         0 20px 55px
-        rgba(0, 0, 0, 0.30);
+        rgba(0, 0, 0, 0.24);
 
     transform:
         translateY(-1px);
@@ -697,23 +565,17 @@ body {
 
 
 .glass-button:active {
-
     transform:
         scale(0.985);
 }
 
 
 .call-button {
-
-    margin-top:
-        14px;
+    margin-top: 14px;
 }
 
-
 .call-icon {
-
-    font-size:
-        1.35rem;
+    font-size: 1.35rem;
 }
 
 
@@ -722,123 +584,79 @@ body {
 ========================================================= */
 
 .taxi-track {
+    position: relative;
 
-    position:
-        relative;
-
-    height:
-        42px;
+    height: 42px;
 
     margin:
         18px 4px 12px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 }
 
-
 .track-line {
+    position: absolute;
 
-    position:
-        absolute;
+    top: 22px;
 
-    top:
-        22px;
+    left: 0;
+    right: 0;
 
-    left:
-        0;
-
-    right:
-        0;
-
-    height:
-        2px;
+    height: 2px;
 
     background:
-
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.20),
-            rgba(73, 255, 145, 0.65),
+            rgba(255, 255, 255, 0.16),
+            rgba(73, 255, 145, 0.55),
             transparent
         );
 }
 
-
 .taxi-car {
+    position: absolute;
 
-    position:
-        absolute;
+    top: 1px;
+    left: 0;
 
-    top:
-        1px;
+    display: grid;
 
-    left:
-        0;
+    place-items: center;
 
-    display:
-        grid;
+    width: 38px;
+    height: 38px;
 
-    place-items:
-        center;
-
-    width:
-        38px;
-
-    height:
-        38px;
-
-    font-size:
-        26px;
+    font-size: 26px;
 
     filter:
         drop-shadow(
-            0 8px 12px
-            rgba(0, 0, 0, 0.5)
+            0 8px 12px rgba(0, 0, 0, 0.5)
         );
 }
 
-
 .taxi-car.drive {
-
     animation:
         taxiDrive
         760ms
-        cubic-bezier(
-            0.2,
-            0.78,
-            0.18,
-            1
-        )
+        cubic-bezier(0.2, 0.78, 0.18, 1)
         both;
 }
-
 
 @keyframes taxiDrive {
 
     0% {
-
-        left:
-            0;
-
-        transform:
-            rotate(-2deg);
+        left: 0;
+        transform: rotate(-2deg);
     }
 
     46% {
-
-        transform:
-            rotate(1deg);
+        transform: rotate(1deg);
     }
 
     100% {
-
-        left:
-            calc(100% - 38px);
-
-        transform:
-            rotate(0deg);
+        left: calc(100% - 38px);
+        transform: rotate(0deg);
     }
 }
 
@@ -848,29 +666,23 @@ body {
 ========================================================= */
 
 .booking-form {
+    display: grid;
 
-    display:
-        grid;
+    gap: 14px;
 
-    gap:
-        14px;
+    padding-top: 6px;
 
-    padding-top:
-        6px;
+    width: 100%;
+
+    min-width: 0;
 }
-
 
 .form-heading {
-
-    margin-bottom:
-        3px;
+    margin-bottom: 3px;
 }
 
-
-.form-heading h1 {
-
-    margin:
-        0;
+.form-heading h2 {
+    margin: 0;
 
     font-family:
         "Segoe Script",
@@ -878,157 +690,184 @@ body {
         "Lucida Handwriting",
         cursive;
 
-    font-style:
-        italic;
+    font-style: italic;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
     font-size:
         clamp(1.8rem, 8vw, 2.6rem);
 
-    line-height:
-        1.05;
+    line-height: 1.05;
 
-    color:
-        white;
+    letter-spacing: 0;
+
+    color: white;
 
     text-shadow:
         0 5px 25px
         rgba(255, 62, 165, 0.20);
 }
 
-
 .form-heading p {
-
     margin:
         9px 0 0;
 
     color:
-        rgba(255, 247, 253, 0.78);
+        rgba(255, 247, 253, 0.70);
 
-    font-size:
-        0.98rem;
+    font-size: 0.98rem;
 
-    line-height:
-        1.45;
+    line-height: 1.45;
 }
 
 
 /* =========================================================
-   FIELDS
+   FIELD
 ========================================================= */
 
 .field-group {
+    display: grid;
 
-    display:
-        grid;
+    gap: 8px;
 
-    gap:
-        8px;
+    width: 100%;
+
+    min-width: 0;
 }
 
-
 label {
-
-    padding-left:
-        2px;
+    padding-left: 2px;
 
     color:
-        rgba(255, 247, 253, 0.92);
+        rgba(255, 247, 253, 0.90);
 
-    font-size:
-        0.95rem;
+    font-size: 0.95rem;
 
-    font-weight:
-        800;
+    font-weight: 800;
 }
 
 
 /* =========================================================
    INPUTS
+
+   iPhone-safe sizing.
 ========================================================= */
 
 input,
 select {
+    display: block;
 
-    width:
-        100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
-    min-height:
-        55px;
+    min-height: 55px;
+
+    margin: 0;
 
     padding:
         0 15px;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.20);
+        rgba(255, 255, 255, 0.18);
 
     border-radius:
         var(--radius-md);
 
-    color:
-        white;
+    color: white;
 
     background:
-
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.13),
-            rgba(255, 255, 255, 0.045)
-        );
+        rgba(0, 0, 0, 0.18);
 
     backdrop-filter:
-        blur(18px)
-        saturate(150%);
+        blur(18px);
 
     -webkit-backdrop-filter:
-        blur(18px)
-        saturate(150%);
+        blur(18px);
 
     box-shadow:
-
         inset 0 1px 0
-        rgba(255, 255, 255, 0.10);
+        rgba(255, 255, 255, 0.08);
 
-    font-size:
-        16px;
+    font-family: inherit;
 
-    outline:
-        none;
+    font-size: 16px;
 
-    transition:
-        border-color 180ms ease,
-        background 180ms ease,
-        box-shadow 180ms ease;
+    outline: none;
+
+    appearance: none;
+
+    -webkit-appearance: none;
 }
 
+
+/* =========================================================
+   DATE INPUT — iPHONE FIX
+========================================================= */
+
+input[type="date"] {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    padding-left: 15px;
+    padding-right: 10px;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/*
+   Keep iOS date picker contents from
+   pushing outside the card.
+*/
+
+input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+
+    min-width: 0;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-left: 4px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
 
 input::placeholder {
-
     color:
-        rgba(255, 247, 253, 0.48);
+        rgba(255, 247, 253, 0.42);
 }
 
+
+/* =========================================================
+   FOCUS
+========================================================= */
 
 input:focus,
 select:focus {
-
     border-color:
-        rgba(255, 139, 211, 0.75);
+        rgba(255, 139, 211, 0.70);
 
     background:
-
-        rgba(20, 5, 25, 0.36);
+        rgba(20, 5, 25, 0.30);
 
     box-shadow:
-
         0 0 0 3px
-        rgba(255, 62, 165, 0.12),
+        rgba(255, 62, 165, 0.10),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.15);
+        rgba(255, 255, 255, 0.12);
 }
 
 
@@ -1037,24 +876,14 @@ select:focus {
 ========================================================= */
 
 select {
-
-    appearance:
-        none;
-
-    -webkit-appearance:
-        none;
-
-    padding-right:
-        42px;
+    padding-right: 42px;
 
     background-image:
-
         linear-gradient(
             45deg,
             transparent 50%,
             rgba(255,255,255,0.8) 50%
         ),
-
         linear-gradient(
             135deg,
             rgba(255,255,255,0.8) 50%,
@@ -1062,15 +891,11 @@ select {
         );
 
     background-position:
-
         calc(100% - 20px) 23px,
-
         calc(100% - 14px) 23px;
 
     background-size:
-
         6px 6px,
-
         6px 6px;
 
     background-repeat:
@@ -1083,15 +908,17 @@ select {
 ========================================================= */
 
 .time-grid {
-
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
-    gap:
-        10px;
+    gap: 10px;
+
+    width: 100%;
+
+    min-width: 0;
 }
 
 
@@ -1100,22 +927,15 @@ select {
 ========================================================= */
 
 .submit-button {
+    margin-top: 2px;
 
-    margin-top:
-        2px;
-
-    min-height:
-        60px;
+    min-height: 60px;
 }
 
-
 .submit-button[disabled] {
+    opacity: 0.65;
 
-    opacity:
-        0.65;
-
-    cursor:
-        wait;
+    cursor: wait;
 }
 
 
@@ -1124,15 +944,12 @@ select {
 ========================================================= */
 
 .button-loader {
+    display: none;
 
-    display:
-        none;
+    width: 18px;
+    height: 18px;
 
-    width:
-        18px;
-
-    height:
-        18px;
+    flex: 0 0 18px;
 
     border:
         3px solid
@@ -1141,15 +958,11 @@ select {
     border-top-color:
         white;
 
-    border-radius:
-        50%;
+    border-radius: 50%;
 }
 
-
 .submit-button.is-loading .button-loader {
-
-    display:
-        inline-block;
+    display: inline-block;
 
     animation:
         spin
@@ -1158,39 +971,33 @@ select {
         infinite;
 }
 
-
 @keyframes spin {
-
     to {
-        transform:
-            rotate(360deg);
+        transform: rotate(360deg);
     }
 }
 
 
 /* =========================================================
-   STATUS MESSAGE
+   STATUS
 ========================================================= */
 
 .form-message {
+    display: none;
 
-    display:
-        none;
+    width: 100%;
 
-    padding:
-        15px;
+    padding: 15px;
 
     border-radius:
         var(--radius-md);
 
-    line-height:
-        1.45;
+    line-height: 1.45;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
     background:
-        rgba(255, 255, 255, 0.08);
+        rgba(255, 255, 255, 0.06);
 
     backdrop-filter:
         blur(18px);
@@ -1199,11 +1006,8 @@ select {
         blur(18px);
 }
 
-
 .form-message.success {
-
-    display:
-        block;
+    display: block;
 
     border:
         1px solid
@@ -1213,32 +1017,21 @@ select {
         #eafff1;
 
     background:
-        rgba(24, 128, 67, 0.28);
-
-    box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.18);
+        rgba(24, 128, 67, 0.20);
 }
 
-
 .form-message.error {
-
-    display:
-        block;
+    display: block;
 
     border:
         1px solid
-        rgba(255, 107, 125, 0.40);
+        rgba(255, 107, 125, 0.35);
 
     color:
         #fff0f2;
 
     background:
-        rgba(162, 35, 60, 0.30);
-
-    box-shadow:
-        0 15px 40px
-        rgba(0, 0, 0, 0.18);
+        rgba(162, 35, 60, 0.22);
 }
 
 
@@ -1249,42 +1042,32 @@ select {
 @media (min-width: 560px) {
 
     .site-shell {
-
         padding:
             max(28px, env(safe-area-inset-top))
             24px
             max(28px, env(safe-area-inset-bottom));
 
-        align-items:
-            center;
+        align-items: center;
     }
-
 
     .hero-card {
+        min-height: auto;
 
-        min-height:
-            auto;
-
-        padding:
-            30px;
+        padding: 30px;
     }
-
 
     .booking-form {
-
         grid-template-columns:
-            1fr 1fr;
+            minmax(0, 1fr)
+            minmax(0, 1fr);
 
-        gap:
-            16px;
+        gap: 16px;
     }
-
 
     .form-heading,
     .time-grid,
     .submit-button,
     .form-message {
-
         grid-column:
             1 / -1;
     }
@@ -1297,8 +1080,12 @@ select {
 
 @media (max-width: 389px) {
 
-    .hero-card {
+    .site-shell {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
+    .hero-card {
         padding:
             20px 12px 18px;
 
@@ -1306,11 +1093,46 @@ select {
             25px;
     }
 
+    .brand-title {
+        font-size: 2.2rem;
+    }
 
     .time-grid {
-
         grid-template-columns:
-            1fr;
+            minmax(0, 1fr);
+    }
+
+    input,
+    select {
+        min-height: 53px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL / NARROW IPHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .hero-card {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .brand-title {
+        font-size: 2rem;
+    }
+
+    input,
+    select {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    input[type="date"] {
+        padding-left: 10px;
+        padding-right: 6px;
     }
 }
 
@@ -1324,7 +1146,6 @@ select {
     *,
     *::before,
     *::after {
-
         animation-duration:
             0.001ms !important;
 

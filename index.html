@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="sv">
-
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
     <meta
@@ -14,69 +13,48 @@
         content="#08050d"
     >
 
-    <meta
-        name="description"
-        content="Snabb och enkel taxi i Skåne."
-    >
+    <title>Snabb Taxi i Skåne</title>
 
-    <title>Taxi – Snabb taxi i Skåne</title>
-
-    <link rel="stylesheet" href="style.css?v=20260820-1">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
     <!-- =====================================================
-         FULL SCREEN BACKGROUND SCENERY
+         FULL-SCREEN BACKGROUND SCENERY
     ====================================================== -->
 
-    <div
-        class="background-slideshow"
-        aria-hidden="true"
-    >
+    <div class="background-slideshow" aria-hidden="true">
 
         <div
             class="background-image active"
-            style="background-image: url('images/scenery1.jpg');"
-        ></div>
+            style="background-image: url('images/scenery1.jpg');">
+        </div>
 
         <div
             class="background-image"
-            style="background-image: url('images/scenery2.jpg');"
-        ></div>
+            style="background-image: url('images/scenery2.jpg');">
+        </div>
 
         <div
             class="background-image"
-            style="background-image: url('images/scenery3.jpg');"
-        ></div>
+            style="background-image: url('images/scenery3.jpg');">
+        </div>
 
     </div>
 
-
-    <!-- Dark cinematic overlay -->
-
-    <div
-        class="background-overlay"
-        aria-hidden="true"
-    ></div>
+    <div class="background-overlay" aria-hidden="true"></div>
 
 
     <!-- =====================================================
-         MAIN WEBSITE
+         MAIN
     ====================================================== -->
 
     <main class="site-shell">
 
         <section class="hero-card">
 
-
-            <!-- Decorative glow -->
-
-            <div
-                class="hero-glow"
-                aria-hidden="true"
-            ></div>
+            <div class="hero-glow"></div>
 
 
             <!-- =================================================
@@ -85,27 +63,18 @@
 
             <header class="hero-header">
 
-                <div class="brand">
-
-                    <div class="brand-name">
-                        TAXI
-                    </div>
-
-                    <p class="subtitle">
-                        Snabb taxi i Skåne
-                    </p>
-
-                </div>
+                <h1 class="brand-title">
+                    Snabb Taxi i Skåne
+                </h1>
 
             </header>
 
 
             <!-- =================================================
                  CALL PANEL
-                 
-                 IMPORTANT:
-                 Hidden by default.
-                 JavaScript shows it ONLY when an error occurs.
+
+                 Hidden normally.
+                 JavaScript shows it only after an error.
             ================================================== -->
 
             <section
@@ -129,15 +98,8 @@
                     class="call-button glass-button"
                     href="tel:+46724474435"
                 >
-
-                    <span class="call-icon">
-                        ☎
-                    </span>
-
-                    <span>
-                        Ring nu
-                    </span>
-
+                    <span class="call-icon">☎</span>
+                    <span>Ring nu</span>
                 </a>
 
             </section>
@@ -168,14 +130,11 @@
                 novalidate
             >
 
-
-                <!-- BOOKING HEADING -->
-
                 <div class="form-heading">
 
-                    <h1>
+                    <h2>
                         Boka en resa
-                    </h1>
+                    </h2>
 
                     <p>
                         Fyll i uppgifterna nedan för att
@@ -257,11 +216,9 @@
                             name="hour"
                             required
                         >
-
                             <option value="">
                                 Välj
                             </option>
-
                         </select>
 
                     </div>
@@ -278,11 +235,9 @@
                             name="minute"
                             required
                         >
-
                             <option value="">
                                 Välj
                             </option>
-
                         </select>
 
                     </div>
@@ -363,10 +318,7 @@
     </main>
 
 
-    <!-- Cache-busting version -->
-
-    <script src="script.js?v=20260820-1"></script>
+    <script src="script.js"></script>
 
 </body>
-
 </html>

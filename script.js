@@ -1,11 +1,10 @@
 const form = document.getElementById("bookingForm");
 const submitButton = document.getElementById("submitButton");
 const statusBox = document.getElementById("status");
+const callPanel = document.getElementById("callPanel");
 
 const hourSelect = document.getElementById("hour");
 const minuteSelect = document.getElementById("minute");
-
-const callPanel = document.getElementById("callPanel");
 
 
 // ============================================================
@@ -35,19 +34,14 @@ if (hourSelect) {
 }
 
 
-// Create minute options:
-// 00, 05, 10 ... 55
+// Create minute options: 00, 05, 10 ... 55
 
 if (minuteSelect) {
 
     minuteSelect.innerHTML =
         '<option value="">Välj</option>';
 
-    for (
-        let minute = 0;
-        minute < 60;
-        minute += 5
-    ) {
+    for (let minute = 0; minute < 60; minute += 5) {
 
         const option =
             document.createElement("option");
@@ -76,30 +70,34 @@ if (form) {
             event.preventDefault();
 
 
-            // ----------------------------------------------------
-            // Hide old error
-            // ----------------------------------------------------
-
-            hideCallPanel();
-
-            statusBox.className = "form-message";
-            statusBox.innerHTML = "";
-
-
-            // ----------------------------------------------------
-            // Prevent duplicate bookings
-            // ----------------------------------------------------
+            // ==================================================
+            // PREVENT DOUBLE SUBMISSION
+            // ==================================================
 
             submitButton.disabled = true;
+
             submitButton.classList.add("is-loading");
 
             submitButton.textContent =
                 "Skickar bokning...";
 
 
-            // ----------------------------------------------------
-            // Collect form data
-            // ----------------------------------------------------
+            // Clear previous status
+
+            statusBox.className =
+                "form-message";
+
+            statusBox.innerHTML = "";
+
+
+            // Hide phone panel when starting a new attempt
+
+            hideCallPanel();
+
+
+            // ==================================================
+            // COLLECT FORM DATA
+            // ==================================================
 
             const booking = {
 
@@ -144,9 +142,9 @@ if (form) {
             };
 
 
-            // ====================================================
+            // ==================================================
             // VALIDATION
-            // ====================================================
+            // ==================================================
 
             if (
                 !booking.from ||
@@ -166,9 +164,9 @@ if (form) {
             }
 
 
-            // ----------------------------------------------------
-            // Validate hour
-            // ----------------------------------------------------
+            // ==================================================
+            // VALIDATE HOUR
+            // ==================================================
 
             const hour =
                 Number(booking.hour);
@@ -187,9 +185,9 @@ if (form) {
             }
 
 
-            // ----------------------------------------------------
-            // Validate minute
-            // ----------------------------------------------------
+            // ==================================================
+            // VALIDATE MINUTE
+            // ==================================================
 
             const minute =
                 Number(booking.minute);
@@ -208,9 +206,9 @@ if (form) {
             }
 
 
-            // ====================================================
+            // ==================================================
             // SEND BOOKING TO CLOUDFLARE
-            // ====================================================
+            // ==================================================
 
             try {
 
@@ -227,6 +225,20 @@ if (form) {
                                 "Accept":
                                     "application/json"
                             },
+
+                            /*
+                             * IMPORTANT:
+                             *
+                             * These names match book.js:
+                             *
+                             * from
+                             * to
+                             * date
+                             * hour
+                             * minute
+                             * name
+                             * phone
+                             */
 
                             body:
                                 JSON.stringify({
@@ -258,141 +270,105 @@ if (form) {
                     );
 
 
-                // =================================================
-                // READ SERVER RESPONSE
-                // =================================================
+                // ==================================================
+                // READ RESPONSE
+                // ==================================================
 
-                let result = null;
+                let result;
 
-                const responseText =
-                    await response.text();
+                try {
 
+                    result =
+                        await response.json();
 
-                if (responseText) {
+                } catch (jsonError) {
 
-                    try {
-
-                        result =
-                            JSON.parse(responseText);
-
-                    } catch (jsonError) {
-
-                        console.error(
-                            "Invalid JSON from server:",
-                            responseText
-                        );
-
-                        throw new Error(
-                            "Servern skickade ett ogiltigt svar."
-                        );
-                    }
+                    throw new Error(
+                        "Servern skickade ett ogiltigt svar."
+                    );
                 }
 
 
-                // =================================================
-                // DEBUG SERVER RESPONSE
-                // =================================================
-
-                console.log(
-                    "Booking HTTP status:",
-                    response.status
-                );
-
-                console.log(
-                    "Booking server response:",
-                    result
-                );
-
-
-                // =================================================
-                // SUCCESS CHECK
-                // =================================================
+                // ==================================================
+                // CHECK RESPONSE
+                // ==================================================
 
                 /*
-                 * Your current book.js returns:
+                 * book.js returns:
                  *
                  * {
                  *     success: true,
                  *     telegramSent: true
                  * }
                  *
-                 * We also accept "ok: true" so this frontend
-                 * remains compatible if the Worker wrapper returns
-                 * that format.
+                 * Therefore we check result.success.
                  */
 
-                const bookingSucceeded =
-                    response.ok &&
-                    result &&
-                    (
-                        result.success === true ||
-                        result.telegramSent === true ||
-                        result.ok === true
-                    );
-
-
-                if (!bookingSucceeded) {
+                if (
+                    !response.ok ||
+                    result.success !== true
+                ) {
 
                     throw new Error(
-                        result?.error ||
+                        result.error ||
                         "Bokningen kunde inte skickas."
                     );
                 }
 
 
-                // =================================================
+                // ==================================================
                 // SUCCESS
-                // =================================================
-
-                hideCallPanel();
-
+                // ==================================================
 
                 statusBox.className =
                     "form-message success";
 
-
                 statusBox.innerHTML = `
-                    <strong>✅ Bokningen är mottagen!</strong>
-                    <br><br>
-                    Tack för din bokning.
-                    <br>
+                    <strong>✅ Bokningen är mottagen!</strong><br><br>
+                    Tack för din bokning.<br>
                     Vi återkommer så snart som möjligt.
                 `;
 
 
-                // ------------------------------------------------
                 // Clear form
-                // ------------------------------------------------
 
                 form.reset();
 
 
-                // ------------------------------------------------
                 // Restore button
-                // ------------------------------------------------
 
-                submitButton.disabled = false;
+                submitButton.disabled =
+                    false;
 
                 submitButton.classList.remove(
                     "is-loading"
                 );
 
-                submitButton.textContent =
-                    "Boka resa";
+                submitButton.innerHTML = `
+                    <span class="button-text">
+                        Boka resa
+                    </span>
+
+                    <span class="button-loader"></span>
+                `;
 
 
-                // ------------------------------------------------
+                // Make absolutely sure
+                // phone panel stays hidden on success
+
+                hideCallPanel();
+
+
                 // Taxi animation
-                // ------------------------------------------------
 
                 triggerTaxiAnimation();
 
             }
 
 
-            // ====================================================
+            // ==================================================
             // ERROR
-            // ====================================================
+            // ==================================================
 
             catch (error) {
 
@@ -403,14 +379,20 @@ if (form) {
 
 
                 showError(
-                    "Bokningen kunde inte skickas." +
-                    "<br><br>" +
+                    "Bokningen kunde inte skickas.<br><br>" +
+
                     "Tekniskt fel: " +
+
                     "<strong>" +
-                    escapeHtml(error.message) +
-                    "</strong>" +
-                    "<br><br>" +
+
+                    escapeHtml(
+                        error.message
+                    ) +
+
+                    "</strong><br><br>" +
+
                     "Ring oss istället på " +
+
                     "<strong>072-447 44 35</strong>."
                 );
             }
@@ -421,7 +403,7 @@ if (form) {
 
 
 // ============================================================
-// ERROR MESSAGE
+// SHOW ERROR
 // ============================================================
 
 function showError(message) {
@@ -433,26 +415,51 @@ function showError(message) {
         message;
 
 
-    // Show phone panel ONLY when there is an error
-
-    showCallPanel();
-
-
-    // Restore button
-
-    submitButton.disabled = false;
+    submitButton.disabled =
+        false;
 
     submitButton.classList.remove(
         "is-loading"
     );
 
-    submitButton.textContent =
-        "Boka resa";
+    submitButton.innerHTML = `
+        <span class="button-text">
+            Boka resa
+        </span>
+
+        <span class="button-loader"></span>
+    `;
+
+
+    // ========================================================
+    // SHOW PHONE PANEL ONLY AFTER ERROR
+    // ========================================================
+
+    showCallPanel();
+
+
+    // Scroll phone panel into view
+    // gently on smaller screens
+
+    setTimeout(() => {
+
+        if (
+            window.innerWidth < 560 &&
+            callPanel
+        ) {
+
+            callPanel.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+        }
+
+    }, 100);
 }
 
 
 // ============================================================
-// SHOW PHONE PANEL
+// SHOW CALL PANEL
 // ============================================================
 
 function showCallPanel() {
@@ -473,7 +480,7 @@ function showCallPanel() {
 
 
 // ============================================================
-// HIDE PHONE PANEL
+// HIDE CALL PANEL
 // ============================================================
 
 function hideCallPanel() {
@@ -516,7 +523,9 @@ function escapeHtml(text) {
 function triggerTaxiAnimation() {
 
     const taxi =
-        document.querySelector(".taxi-car");
+        document.querySelector(
+            ".taxi-car"
+        );
 
     if (!taxi) {
         return;
@@ -548,13 +557,14 @@ const backgroundImages =
         ".background-image"
     );
 
-
 let currentBackground = 0;
 
 
 function changeBackground() {
 
-    if (backgroundImages.length <= 1) {
+    if (
+        backgroundImages.length <= 1
+    ) {
         return;
     }
 
@@ -582,10 +592,12 @@ function changeBackground() {
 
 
 // ============================================================
-// START SLIDESHOW
+// START BACKGROUND SLIDESHOW
 // ============================================================
 
-if (backgroundImages.length > 1) {
+if (
+    backgroundImages.length > 1
+) {
 
     setInterval(
         changeBackground,
