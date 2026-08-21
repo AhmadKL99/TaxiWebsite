@@ -580,7 +580,7 @@ body {
 
     border:
         1px solid
-        rgba(235, 235, 235, 0.22);
+        rgba(205, 205, 205, 0.22);
 
     border-radius:
         20px;
@@ -592,8 +592,8 @@ body {
 
         linear-gradient(
             135deg,
-            rgba(235, 235, 235, 0.12),
-            rgba(235, 235, 235, 0.035 )
+            rgba(205, 205, 205, 0.12),
+            rgba(205, 205, 205, 0.035 )
         );
 
     backdrop-filter:
@@ -607,7 +607,7 @@ body {
     box-shadow:
 
         inset 0 1px 0
-        rgba(235, 235, 235, 0.38),
+        rgba(205, 205, 205, 0.38),
 
         inset 0 -1px 0
         rgba(0, 0, 0, 0.15),
@@ -684,8 +684,8 @@ body {
 
         linear-gradient(
             135deg,
-            rgba(255, 255, 255, 0.28),
-            rgba(255, 255, 255, 0.10)
+            rgba(205, 205, 205, 0.28),
+            rgba(205, 205, 205, 0.10)
         );
 
     box-shadow:
